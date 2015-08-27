@@ -1,0 +1,2438 @@
+\documentclass[a4paper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%Paquetes
+\usepackage[spanish]{babel}  
+\usepackage{indentfirst} %%%%%%%%%%%%%%%%Crear un indent al principio
+\usepackage[latin1]{inputenc}%%%%%%%%%%%%ñ y acentos
+\usepackage{amstext}%%%%%%%%
+\usepackage{amsfonts}%%%%%%%
+\usepackage{amssymb}%%%%%%%% AMSLaTeX
+\usepackage{amscd}%%%%%%%%%%
+\usepackage{amsmath}%%%%%%%%
+\usepackage{enumerate}%%%%%%%%%%%%%%%%Mejoras del entorno enumerate
+\usepackage[all]{xy}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage[mathcal]{eucal}%%%%%%%Caligrafica matematica
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+\onehalfspacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%Teoremas
+\newtheorem{teo}{Teorema}[section]%%%%%%%%% Teorema
+\newtheorem{defi}{Definición}[section]%%%%%%%% Definicion
+\newtheorem{lema}[teo]{Lema}%%%%%%%%%%%%% Lema
+\newtheorem{propo}[teo]{Proposición}%%%%%%%% Proposicion
+\newtheorem{cor}[teo]{Corolario}%%%%%%%%%%%Corolario
+\newtheorem{ob}{Observación.}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%Comandos
+\newcommand{\R}{\mathbb{R}}%%%%%%%%%%%%Numeros reales
+\newcommand{\F}{\mathbb{F}}%%%%%%%%%%%%Cuerpo
+\newcommand{\C}{\mathbb{C}}%%%%%%%%%%%%Numeros complejos
+\newcommand{\Q}{\mathbb{Q}}%%%%%%%%%%%%Numeros racionales
+\newcommand{\N}{\mathbb{N}}%%%%%%%%%%%%Numeros naturales
+\newcommand{\Z}{\mathbb{Z}}%%%%%%%%%%%%Numeros enteros
+\newcommand{\Fp}{\mathbb{F}_p}%%%%%%%%%%%%Cuerpo de p elementos
+\newcommand{\g}{\mathfrak{g}}%%%%%%%%%%%%Algebra de Lie del grupo G
+\newcommand{\V}{\mathcal{V}}%%%%%%%%%%%%Variedad
+\newcommand{\W}{\mathcal{W}}%%%%%%%%%%%%Variedad
+\newcommand{\h}{\mathcal{H}}%%%%%%%%%%%%Algebra de Lie del grupo H
+\newcommand{\uni}{\mathcal{U}}%%%%%%%%%%%%Algebra envolvente
+\newcommand{\fin}{ $\Box $\vspace{0.5\baselineskip}}
+\newcommand{\p}{\mathfrak{p}}%%%%%%%% Ideal primo
+\newcommand{\m}{\mathfrak{m}}%%%%%%%% Ideal maximal
+\newcommand{\limind}{\lim_{\longrightarrow} } 
+\newcommand{\gp}{\mathcal{G'}}%%%%%%%%%%%Algebra del grupo G'
+\newcommand{\lto}{\longrightarrow}%%%%%%Simplificacion de la flecha larga
+\newcommand{\wa}{\omega_2} %%%%%%%%%%%forma simplectica
+\newcommand{\Wa}{\Omega_2} %%%%%%%%%% forma simplectica lineal
+\newcommand{\lag}{\lambda_g}%%%%%%%%%%%%Traslacion a la izquierda
+\newcommand{\rg}{\rho_g}%%%%%%%%%%%%%%%%Traslacion a la derecha
+\newcommand{\Gr}{\boldsymbol{G}}%%%%%%%%%%Recubridor universal
+\newcommand{\norma}[1]{\: \parallel #1 \!\parallel\! }%%%Norma de un vector
+\newcommand{\abs}[1]{\left|\, #1 \right|}  %%%Valor absoluto 
+\newcommand{\Pro}{\mathbb{P}}%%%%%%Espacio proyectivo
+\newcommand{\D}{\mathcal{D}}%%%%%%%%%%%%Serie derivada
+\newcommand{\central}{\mathcal{C}}%%%%%%%%%%%%Serie central
+\renewcommand{\to}{\lto}
+\newcommand{\escalar}[2]{\left\langle\, #1,#2\, \right\rangle}  %%%Producto escalar 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%Operadores
+\newcommand{\dem}{\noindent\textbf{Demostración. }\vspace{0.3 cm}}%%Demostracion
+\DeclareMathOperator{\End}{End}%%%%%%%%%%Endomorfismo
+\DeclareMathOperator{\Ad}{Ad}%%%%%%%%%%Adjunta
+\DeclareMathOperator{\grad}{grad}%%%%%%%%%%Graciente
+\DeclareMathOperator{\Dif}{Dif}%%%%%%%%%%Diferenciales
+\DeclareMathOperator{\sop}{sop}%%%%%%%%%Soporte
+\DeclareMathOperator{\distancia}{d}%%%%%%%%Distancia
+\DeclareMathOperator{\sen}{sen}%%%%%%%%%%Seno español
+\DeclareMathOperator{\Der}{Der}%%%%%%%%%%Derivaciones
+\DeclareMathOperator{\rang}{rang}%%%%%%%%Rango
+\DeclareMathOperator{\Hom}{Hom}%%%%%%Homomorfismos
+\DeclareMathOperator{\Ann}{Ann}%%%%%%%Anulador
+\DeclareMathOperator{\Img}{Im} %%%%Parte imaginaria
+\DeclareMathOperator{\rad}{rad}%%%%%%%%Radical
+\DeclareMathOperator{\Ker}{Ker}%%%%%%%Nucleo
+\DeclareMathOperator{\Id}{Id}%%%%%%% Identidad
+\DeclareMathOperator{\GL}{GL}%%%%%%%%%Grupo lineal
+\DeclareMathOperator{\Apli}{Apli}%%%%%%Aplicaciones
+\DeclareMathOperator{\Bil}{Bil}%%%%%Bilineales
+\DeclareMathOperator{\Spec}{Spec}%%%%Espectro
+\DeclareMathOperator{\Aut}{Aut}%%%%Automorfismo
+\DeclareMathOperator{\Traza}{Traza}  %%% Traza de un endomorfismo
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%
+\title{Teoria de Galois}
+\author{José Luis Tábara}
+\date{jltabara@gmail.com}
+%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+
+\vspace{-1cm}
+\maketitle
+
+\end{tcolorbox}
+
+\thispagestyle{empty}
+
+\tableofcontents
+
+\newpage
+
+
+
+\section{Primeros ejemplos}
+
+
+En estas notas todos los anillos son conmutativos y tienen unidad. Emplearemos en general la letra $A$ para denotar un anillo.  Mediante $A[x]$ (con corchetes) denotamos el anillo de polinomios con coeficientes en $A$. Si $a \in A$, mediante $(a)$ denotamos el ideal principal generado por el elemento $a$.
+
+\begin{defi}
+
+Un {\sf cuerpo} \index{cuerpo} es un anillo donde todo elemento no nulo es invertible. 
+
+\end{defi}
+
+Sea $k$ un cuerpo.  El conjunto $k^*= k-\{0\}$ es un grupo (abeliano) respecto a la multiplicación.  Además, todo cuerpo es en particular un anillo íntegro:  si $ab=0$, donde $a$ es no nulo, multiplicando dicha expresión por $a^{-1}$ obtenemos que $b=0$ y no existen divisores de cero.
+
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+
+
+\begin{itemize}
+
+%\vspace{-0.5 \baselineskip}
+
+\item  Los conjuntos $\Q$, $\R$ y $\C$ con las operaciones habituales son cuerpos.
+
+\item El subconjunto de $\C$
+$$
+\Q(i)=\{ a+bi \text{ con } a,b \in \Q \}
+$$
+es un cuerpo con las operaciones habituales.
+
+\item También es un cuerpo el subconjunto de $\R$
+$$
+\Q(\sqrt{2})= \{ a+b\sqrt{2} \text{ con } a, b \in \Q\}
+$$
+
+
+\item Sea $p$ un número primo.  Veamos que el anillo $\Fp=\Z/(p) \,$ es un cuerpo.  Sea $\pi(a)$ un elemento no nulo.  Entonces $a$ no es múltiplo de $p$ y como~$p$ es primo, el máximo común divisor de $p$ y $a$ es $1$.  Por el lema de Bezout, se puede encontrar una expresión del tipo
+$$
+mp+na=1
+$$ 
+donde $m$ y $n$ son enteros.  Tomando clases de equivalencia módulo $p$
+$$
+\pi(n)\pi(a)=\pi(1)=1
+$$
+y todo elemento no nulo es invertible.
+
+\item  Todo anillo íntegro y finito es un cuerpo.  Sea $a \in A$ no nulo.  La aplicación
+$$
+\begin{array}{rccc}
+\varphi:& A & \lto & A \\
+     & b & \lto & ab
+\end{array}
+$$
+es inyectiva puesto que $A$ es íntegro.  Como el conjunto es finito, también es epiyectiva. Existe un elemento tal que $\varphi(b)=1$.  Esto equivale a encontrar el inverso de $a$.
+
+\item $\Z$ no es un cuerpo pues existen elementos que no son invertibles.  Sin embargo existen cuerpos (por ejemplo $\Q$) que contienen  a $\Z$.
+
+\item  Sea $n$ un número compuesto y $n =n_1n_2$ una descomposición no trivial.  Tomando clases de equivalencia módulo $n$
+$$
+\pi(n_1)\pi(n_2)=\pi(n)=0
+$$
+El anillo $\Z/(n)$ tiene divisores de cero y no puede ser un cuerpo.  Además no existe ningún cuerpo que contenga al anillo $\Z/(n)$.     
+
+
+
+\end{itemize}
+
+\begin{ob}
+
+Existe una generalización de uno de los ejemplos anteriores, aunque su demostración no es tan elemental. El teorema de Wedderbun afirma que todo anillo finito e íntegro es necesariamente conmutativo. Todo cuerpo no conmutativo es necesariamente infinito.
+
+\end{ob}
+
+\section{Ideales y morfismos}
+
+
+
+\begin{propo}
+
+Un anillo $A$ es un cuerpo si y solo si sus únicos ideales son el cero y el total.
+
+\end{propo}
+
+\noindent{\bf Demostración.} $\Rightarrow)$ Sea $A$ un cuerpo e $I$ un ideal no nulo.  Si $a \in I$ es no nulo, entonces $a^{-1}a = 1 \in I$ y el ideal es el total.
+
+$\Leftarrow)$ Supongamos que $A$ posee solamente ideales triviales.  Si $a \in A$ es no nulo, el ideal principal $(a)$ es el total.  Existe un elemento $b \in A$ tal que $ab=1$ y todo elemento no  nulo es invertible. \fin
+
+\begin{cor}
+
+Un anillo cociente $A/I$ es un cuerpo si y solo si $I$ es un ideal maximal.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Gracias al morfismo de paso al cociente, los ideales de $A/I$ se identifican con los ideales de $A$ que contienen a $I$.
+
+
+$\Rightarrow)$ Si $I$ es maximal, solamente existen dos ideales que lo contienen.  Entonces el cociente tiene dos ideales y es un cuerpo.
+
+
+$\Leftarrow)$ Si $A/I$ es un cuerpo, solamente posee dos ideales.  Existen dos ideales que contienen a $I$, que son necesariamente el mismo y el total.  El ideal es maximal.  \fin
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\vspace{-0.5\baselineskip}
+
+\begin{itemize}
+
+
+
+\item En $ \Z$ los ideales maximales son de la forma $(p)$ donde $p$ es un primo no nulo.  Esto nos da otra demostración de que $\Fp$ es un cuerpo.
+
+\item El polinomio $x^2+1$ es irreducible sobre el cuerpo $\Q$ y el ideal que genera es maximal.  El anillo cociente $\Q[x]/(x^2+1)$ es un cuerpo.
+
+\item  En general, si sobre un cuerpo $k$ existen polinomios irreducibles de grado mayor que $1$, se pueden construir nuevos cuerpos haciendo cocientes del anillo de polinomios. 
+
+
+\end{itemize}
+
+
+
+\begin{defi}
+
+Un {\sf morfismo de cuerpos} \index{morfismo!de cuerpos} es una aplicación $\varphi: k \rightarrow k'$ que verifica:
+
+\begin{itemize}
+
+\vspace{-0.5 \baselineskip}
+
+\item $\varphi(a+b)= \varphi(a)+ \varphi(b)$
+
+\item  $\varphi(ab)= \varphi(a)\varphi(b)$
+
+\item $\varphi(1)=1$
+
+\end{itemize}
+
+\end{defi}
+
+Un morfismo de cuerpos es simplemente un morfismo de anillos con unidad.  Debido a la propiedad $\varphi(1)=1$, un morfismo de cuerpos nunca es nulo.  El núcleo es un ideal que no puede ser el total.  Como un cuerpo tiene solamente dos ideales obtenemos la
+
+\begin{propo}
+
+Todo morfismo de cuerpos es inyectivo.
+
+\end{propo}
+
+Si $\varphi: k \rightarrow k'$ es morfismo y es biunívoco, entonces la aplicación inversa es también morfismo.  Los morfismos biyectivos se denominan {\sf isomorfismos}. \index{isomorfismo}  Los isomorfismos de $k$ en si mismo son los \index{automorfismo} {\sf automorfismos}.  Dado un cuerpo~$k$, el conjunto de sus automorfismos se designa por $\Aut(k)$ y es un grupo respecto a la composición.  Si $k $ y $k'$ son cuerpos isomorfos, los grupos $\Aut(k)$ y $\Aut(k')$ son isomorfos.
+
+
+
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+%\vspace{-0.5 \baselineskip}
+
+\item La conjugación $x \rightarrow \overline{x}$ es un automorfismo de $\C$.
+
+\item La inyección canónica de $\Q$ en $\R$ y la de éste en $\C$.
+
+\item Supongamos que existe un morfismo $\varphi$ de $\Fp$ en $k$.  Necesariamente se cumple
+$$
+\varphi(n)= \varphi(1+ \stackrel{n)}\cdots +1) = \varphi(1)+ \stackrel{n)}{\cdots}+ \varphi(1)= 1+ \stackrel{n)}{\cdots}+1
+$$
+Como mucho, existe un morfismo de $\Fp$ en $k$.  En particular, el grupo $\Aut(\Fp)$ es trivial.
+
+\item Supongamos dado un morfismo $\varphi$ de $\Q$ en $k$.  Este morfismo está totalmente determinado puesto que 
+$$
+\varphi(n)= 1+ \stackrel{n)}{\cdots}+1= n\cdot 1
+$$
+y si $q= m/n$, tenemos que $\varphi(q)= \varphi(n)\varphi(m)^{-1}$.  El grupo $\Aut(\Q)$ es trivial.
+
+\item  Sea $\varphi$ el único morfismo de anillos de $\Q[x]$ en $\C$ que sobre $\Q$ es la identidad y que cumple $\varphi(x)=i$.  Debido a la propiedad $i^2=-1$, la imagen del morfismo es precisamente $\Q(i)$.  El polinomio $x^2+1$ pertenece al núcleo y es el generador de dicho ideal.  El teorema de factorización canónica nos dice que existe un isomorfismo entre los cuerpos $\Q[x]/(x^2+1)$  y $\Q(i)$. El mismo razonamiento demuestra que $\R[x]/(x^2+1)$ es isomorfo a $\C$.
+
+\end{itemize}
+
+
+Consideremos un cuerpo $k$.  Existe un único morfismo de $\Z$ en $k$ que denominaremos {\sf característica}\index{característica} y lo denotaremos por $ch$. Este morfismo viene definido por la condición $ch(n) = n \cdot 1$. Como $\Z$ no es un cuerpo, puede ocurrir que el morfismo no sea inyectivo. La imagen de $\Z$ por $ch$ es un anillo íntegro y el núcleo de $ch$ debe ser un ideal primo, que puede ser el ideal nulo o bien el generado por un número primo positivo.
+
+\begin{defi}
+
+Un cuerpo $k$ tiene {\sf característica cero} si $\Ker(ch)=0$.  Tiene {\sf característica $p$}  si $\Ker(ch)=(p)$.
+
+\end{defi}
+
+Existe  otra definición de característica que no hace intervenir al morfismo $ch$.  La demostración de la equivalencia de ambas definiciones es inmediata.
+
+\begin{propo}
+
+El menor entero $n$ que cumple $n\cdot 1=0$ es la característica de $k$.  Si necesariamente dicha ecuación implica que $n=0$, entonces $k$ tiene característica nula.
+
+\end{propo}
+
+Si la característica es nula, podemos considerar que $\Z$ está contenido en el cuerpo $k$.  Si el cuerpo tiene característica $p$, via el morfismo $ch$, se puede considerar a $\Fp$ como un subconjunto de $k$.
+
+
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+%\vspace{-0.5 \baselineskip}
+
+
+\begin{itemize}
+
+\item Los cuerpos $\Q$, $\R$ y $\C$ tienen característica nula.
+
+\item El cuerpo $\Fp$ tiene característica $p$.
+
+\item Sea $f$ un polinomio irreducible sobre $\Q$. El cuerpo $\Q[x]/(f)$ tiene característica nula. En general si un cuerpo $k$ tiene característica $p$, todo cuerpo de la forma $k[x]/I$ sigue teniendo característica $p$.
+
+\item Sean $k$ y $K$ dos cuerpos tales que $k \subset K$. El morfismo $ ch: \Z \rightarrow K$ tiene su imagen enteramente contenida en el cuerpo $k$ y de este modo la características de $k$ y de $K$ coinciden.
+
+\item En todo anillo conmutativo es válido el \index{binomio de Newton} {\sf binomio de Newton}
+$$
+(a+b)^n=\sum_{i=0}^n \binom{n}{i} a^i b^{n-i}
+$$
+Si la característica del anillo es $p$ y elevamos a $p$ un binomio, todos los factores, salvo el primero y el último son nulos (los coeficientes intermedios son múltiplos de $p$). Esto prueba que si $k$ tiene característica $p$ la aplicación
+$$
+\begin{array}{lccc}
+\phi:& k & \rightarrow & k \\
+     & a  & \rightarrow &a^p
+     \end{array}
+$$
+es un morfismo de cuerpos, llamado \index{morfismo!de Fröbenius} {\sf morfismo de Fröbenius}. Este morfismo no es necesariamente epiyectivo.     
+
+
+\end{itemize}
+
+\section{Generación de anillos y cuerpos}
+
+Hemos visto que muchos anillos y cuerpos con los que hemos tratado se pueden considerar incluidos en otros anillos o cuerpos.
+
+\begin{defi}
+
+Sea $A$ un anillo.  Un subconjunto $B \subset A$ es un {\sf subanillo}\index{subanillo} si con las operaciones inducidas es un anillo.  Un subconjunto $k \subset A$ es un {\sf subcuerpo}\index{subcuerpo} si con las operaciones inducidas es un cuerpo.
+
+\end{defi}
+
+\vspace{0.5 \baselineskip}\noindent{\bf Ejemplos.}
+
+
+
+\begin{itemize}
+
+\item $\Z$ es un subanillo de $\Q$ de $\R$ y de $\C$.
+
+\item  $\Q$ es un subcuerpo de $\R$ y éste es un subcuerpo de $\C$.
+
+\item $k$ es un subcuerpo del anillo $k[x]$.  También es subcuerpo de $k[x]/(f)$.
+
+\item $\Q(i)$ es un subcuerpo de $\C$.
+
+\item $\Q(\sqrt{2})$ es un subcuerpo de $\R$ y por lo tanto de $\C$.
+
+\end{itemize}
+
+\begin{propo}
+
+La intersección de subanillos es subanillo y la intersección de subcuerpos es subcuerpo.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Sea $A$ una anillo y $B_i$ una colección de subanillos.  Veamos que la intersección $\bigcap B_i$ es también subanillo.  Como $1 \in B_i$ para todo $i$, necesariamente $1 \in \bigcap B_i$.  Sean $a$ y $b$ dos elementos de $\bigcap B_i$.  Entonces $a$ y $b$ pertenecen a todo subanillo $B_i$.  De esta forma $a+b$ y $ab$ pertenecen a todos los $B_i$ y también a la intersección. Si todos los $B_i$ son cuerpos, dado $a \in \bigcap B_i$ no nulo, el mismo razonamiento prueba que $a^{-1} \in \bigcap B_i$ y es un subcuerpo.  \fin
+
+Gracias a esta proposición podemos hablar del subanillo o del subcuerpo generado por un subconjunto.
+
+\begin{defi}
+
+Sea $S \subset A$ un subconjunto.  La intersección de todos los subanillos que contienen a $S$ se denota $[S]$ (con corchetes).  Dicho anillo se dice que está {\sf generado} \index{subanillo generado} por $S$.
+
+\end{defi}
+
+La intersección es no vacía pues existe al menos un subanillo (el propio~$A$) que contiene a $S$.  De todos los subanillos que contienen a $S$, precisamente~$[S]$ es el menor de ellos: si $S \subset B$ y $B$ es subanillo, entonces $[S] \subset B$. 
+
+\begin{ob} 
+
+El subanillo $[S]$ no determina al subconjunto $S$.  Puede ocurrir que $S \neq S'$ y sin embargo $[S]= [S']$.
+
+\end{ob}
+
+
+\vspace{0.5 \baselineskip}\noindent{\bf Ejemplos.}
+
+
+
+\begin{itemize}
+
+\item Sea $A= \R$ y $ S= \{1\}$. El subanillo generado por $S$ es precisamente $\Z$.
+
+\item Sea $ A= \C$ y $S= \{1,i\}$.  Si un subanillo contiene a $S$, necesariamente contiene a todo elemento de la forma $a+ bi$ con $a, b \in \Z$.  Pero este conjunto es ya de por si un anillo.  Tenemos que $[1,i]= \Z(i)$, el anillo de los enteros de Gauss. Si $S=\{1,1+i\}$ el subanillo que genera también es el de los enteros de Gauss.
+
+\item Sea $A=k[x]$.  El subanillo generado por $S=k \cup \{x\}$ es todo el anillo de polinomios.
+
+\end{itemize}
+
+
+Para la construcción del subanillo generado por un subconjunto nos hemos asegurado de que al menos existe un subanillo que contiene a $S$.  En general no podremos afirmar que existe un subcuerpo que contiene a $S$.  Por ello solamente consideramos subcuerpos  de un cuerpo y no de un anillo.
+
+\begin{defi}
+
+Dado un cuerpo $k$ y un subconjunto $S \subset k$, denotamos por~$(S)$ (con paréntesis) a la intersección de todos los subcuerpos que contienen a $S$.
+
+\end{defi}
+
+De nuevo $(S)$ es el mínimo cuerpo que contiene a $S$.  Además tenemos que $[S] \subset (S)$ pues todo cuerpo es en particular un anillo.
+
+\begin{ob}
+
+La notación empleada para designar el subcuerpo generado puede confundirse con la utilizada para denotar el ideal principal generado por un elemento.  El contexto aclarará los posibles conflictos.
+
+\end{ob}
+
+
+
+Dado un cuerpo $k$ la intersección de todos los subcuerpos de $k$ necesariamente contienen al $1$.  El subcuerpo generado por el $1$ se denomina {\sf subcuerpo primo} \index{subcuerpo!primo} de $k$.  La característica del subcuerpo primo coincide con la característica del cuerpo $k$. Un cuerpo se denomina {\sf primo} si coincide con su subcuerpo primo.  
+
+\begin{propo}
+
+Los cuerpos primos son $\Fp$ y $\Q$.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Sea $k$ un cuerpo primo.  Dicho cuerpo debe contener a todos los múltiplos del $1$.  Si el cuerpo tiene característica $p$ entonces dicho cuerpo coincide con~$\Fp$.  Si tiene característica nula, entonces el cuerpo contiene un subanillo isomorfo a $\Z$.  Pero por ser cuerpo debe contener a todas las fracciones formadas con elementos de $\Z$.  Entonces $k$ contiene un cuerpo isomorfo a $\Q$ y por ser primo coincide con él.  \fin
+
+\begin{cor}
+
+Si $k$ tiene característica $p$ su subcuerpo primo es $\Fp$.  Si tiene característica nula su subcuerpo primo es $\Q$.
+
+\end{cor}
+
+\begin{cor}
+
+Salvo isomorfismos solo existe un cuerpo con $p$ elementos.
+
+\end{cor}
+
+\begin{ob}
+
+También es cierto que existe un único cuerpo con $p^n$ elementos (que se denota $\mathbb{F}_{p^n}$), pero la demostración de este hecho no es tan elemental. La veremos a lo largo de estas notas.
+
+\end{ob}
+
+\section{Cuerpos de fracciones}
+
+Todo subanillo contenido en un cuerpo es un anillo íntegro.  Veremos que todo anillo íntegro se puede considerar como subanillo de un cuerpo.  Esta construcción también aclarará la relación entre $[S]$ y $(S)$ en los casos que nos interesan.
+
+Sea $A$ un anillo íntegro y denotamos por $A^*$ al conjunto $A-\{0\}$.  En el producto cartesiano $A \times A^*$ introducimos la relación de equivalencia
+$$
+(a,b) \sim (a',b') \text{ si } ab'= a'b
+$$
+La clase de equivalencia del elemento $(a,b)$ se denotará con la fracción $a/b$.  Con esta notación, más sugestiva, tenemos
+$$
+\frac{a}{b} \sim \frac{a'}{b'} \text{ si y solo si } ab'= a'b
+$$
+En el espacio cociente introducimos las  operaciones 
+\begin{eqnarray*}
+\frac{a}{b}+ \frac{a'}{b'}&=& \frac{ab'+a'b}{bb'}\\
+\frac{a}{b} \cdot \frac{a'}{b'}& =& \frac{aa'}{bb'} 
+\end{eqnarray*}
+Dichas definiciones son independientes de los representantes que tomemos de cada clase y dotan al conjunto cociente de estructura de anillo.  El elemento neutro para la suma es $0/b$ y el elemento neutro para el producto $1/1$.  Si una fracción $a/b$ es no nula, es debido a que el numerador es no nulo.  En este caso la fracción $b/a$ es la inversa y el anillo en cuestión es un cuerpo.  Este cuerpo que acabamos de construir lo denotaremos $\mathrm{Fr}(A)$.
+
+\begin{defi}
+
+ $\mathrm{Fr}(A)$ es el {\sf cuerpo de fracciones}\index{cuerpo!de fracciones} del anillo  $A$.
+
+\end{defi}
+
+A cada elemento $a \in A$ le podemos hacer corresponder la fracción $a/1$.  Esto nos da un morfismo de $A$ en su cuerpo de fracciones que es inyectivo.  Todo anillo íntegro se puede considerar un subanillo de su cuerpo de fracciones.
+
+\begin{ob}
+
+En el caso del anillo $k[x]$, es costumbre denotar a su cuerpo de fracciones mediante $k(x)$ (con paréntesis).  Sus elementos se llaman \index{fracciones racionales} {\sf fracciones racionales}.
+
+\end{ob}
+
+El siguiente resultado se conoce como la {\sf propiedad universal} \index{propiedad universal!anillo de fracciones} del anillo de fracciones.
+
+\begin{propo}
+
+Sea $A$ un anillo íntegro, $k$ un cuerpo y $\varphi:A \rightarrow k$ un morfismo inyectivo.  Existe un único morfismo de cuerpos 
+$$
+\overline{\varphi} : \mathrm{Fr}(A) \lto k
+$$
+ que sobre $A$ coincide con $\varphi$.
+ 
+ \end{propo}
+ 
+\noindent{\bf Demostración.}  Si $\overline{\varphi}$ es morfismo de cuerpos debe cumplir 
+$$
+\overline{\varphi}(b^{-1})= {(\overline{\varphi}(b))}^{-1}
+$$
+  Como $\varphi$ es inyectivo, $\varphi(b)$ es un elemento invertible del anillo si $b$ es no nulo.  Todo elemento del anillo de fracciones se puede expresar como una fracción $a/b$.  Necesariamente se debe cumplir
+ $$
+ \overline{\varphi}(a/b) = \overline{\varphi}(a b^{-1})= \overline{\varphi}(a){\overline{\varphi}(b)}^{-1}= \varphi(a) {\varphi(b)}^{-1}
+ $$
+ y el morfismo es único.  
+ 
+ Para demostrar la existencia del morfismo utilizamos como definición el resultado que acabamos  de ver.  Fácilmente se observa que la definición de $\overline{\varphi}$ no depende de la fracción tomada y que esta aplicación es un morfismo de cuerpos que sobre $A$ coincide con $\varphi$.   \fin
+
+Si el morfismo no es inyectivo entonces no podemos asegurar que $\varphi(b)$ es invertible y la definición de $\overline{\varphi}$ no tiene sentido para aquellas fracciones cuyo denominador tenga una imagen no invertible.
+
+
+\begin{cor}
+
+Un anillo es íntegro si y solo si es un subanillo de un cuerpo.
+
+\end{cor}
+
+Dado un cuerpo, cualquier subanillo $[S]$ es también íntegro.  El cuerpo de fracciones de $[S]$ es el mínimo cuerpo que contiene a $S$ y  coincide con nuestra definición de $(S)$.
+
+
+
+\begin{cor}
+
+Si $k$ es un cuerpo, el cuerpo de fracciones de $[S]$ es $(S)$.
+
+\end{cor}
+
+\vspace{0.5 \baselineskip}\noindent{\bf Ejemplos.}
+
+
+
+\begin{itemize}
+
+\item El cuerpo de fracciones de $\Z$ es $ \Q$.  Todo cuerpo que contenga a $\Z$ debe contener también a $\Q$ como subcuerpo. Los cuerpos de característica cero tienen un subcuerpo isomorfo a $\Q$.
+
+\item Dado el anillo de los enteros de Gauss, $\Z(i)$, su cuerpo de fracciones es $\Q(i)$.
+
+
+\item Si $A$ es un cuerpo, su cuerpo de fracciones es (isomorfo a) A.
+
+\item Si un cuerpo $k$ contiene a un subanillo $A$, entonces contiene al cuerpo de fracciones de $A$.  En este sentido, el cuerpo de fracciones es el ``mínimo'' cuerpo que contiene al anillo $A$.
+
+
+
+\end{itemize}
+
+\section{$k$-álgebras}
+
+Aunque estamos principalmente interesados en el estudio de los cuerpos, muchas veces tendremos que utilizar conceptos y resultados de la teoría de anillos.  Es por esto que se estudia el concepto de $k$-álgebra y no simplemente el de extensión.
+
+\begin{defi}
+
+Una {\sf $k$-álgebra} \index{k-álgebra@$k$-álgebra} es un anillo $A$ y un morfismo de anillos\linebreak $i: k \rightarrow A$. Si cambiamos el anillo $A$ o el morfismo $i$ obtenemos otra estructura de $k$-álgebra.
+
+\end{defi}
+
+En general, el morfismo se sobreentiende y  una $k$-álgebra se denota simplemente por $k \rightarrow A$. Si tenemos un morfismo $i:k \rightarrow A$, entonces es inyectivo y la imagen  $i(k)$ es canónicamente isomorfa a $k$.  Por ello muchas veces se  llama $k$-álgebra a un anillo que contiene como subanillo al cuerpo $k$.  Nosotros cometeremos habitualmente este abuso de notación. Los elementos de la imagen de $k$ se denominan {\sf constantes} \index{constantes} y son elementos invertibles del anillo.  Los ideales de $A$ no pueden contener constantes.
+
+
+\begin{defi}
+
+Una {\sf extensión} \index{extensión} del cuerpo $k$ es un  $k$-álgebra $k\rightarrow K$  tal que $K$ tiene estructura de cuerpo.
+
+\end{defi}
+
+
+Con el abuso de notación comentado, una extensión consta de dos cuerpos:  el cuerpo ``mayor'' $K$, llamado muchas veces extensión, y un subconjunto $k$ que tiene estructura de subcuerpo, que a veces llamaremos \index{cuerpo!base} {\sf cuerpo base}. 
+
+\begin{defi}
+
+Dadas dos $k$-álgebras $k \rightarrow A$ y $k \rightarrow A'$, un {\sf morfismo de $k$-álgebras}\index{morfismo!de $k$-álgebras} (también llamado \index{k-morfismo@$k$-morfismo} {\sf $k$-morfismo}) es un morfismo de anillos $\phi: A \rightarrow A'$ que hace conmutativo el diagrama
+$$
+\xymatrix{
+ A \ar[rr]^\phi & &A'\\
+ &k\ar[ul]\ar[ur]
+}
+$$
+
+\end{defi}
+
+Si cometemos el abuso de notación de suponer que $k$ está incluido en el anillo, un morfismo de $k$-álgebras no es más que un morfismo de anillos que sobre $k$ es la identidad.  
+
+ Si la aplicación es biyectiva, la aplicación inversa es también morfismo de álgebras. Podemos  hablar de álgebras isomorfas. 
+ 
+ 
+ \begin{cor}
+ 
+ Un $k$-morfismo entre dos extensiones es siempre inyectivo.
+ 
+ \end{cor}
+ 
+ Es claro que si el dominio del morfismo no es una extensión, puede ocurrir que el morfismo no sea inyectivo.
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item La inyección natural $\R \rightarrow \C$ es una extensión. Normalmente relajamos la notación y decimos que $\C$ es una extensión de $\R$. Del mismo modo $\R$ es una extensión de $\Q$.  El cuerpo $\Q(i)$ es una extensión de $\Q$.
+
+\item Todo cuerpo es una extensión de su subcuerpo primo.  En general todo cuerpo $K$ es una extensión de cualquier subcuerpo $k$ que esté contenido en $K$.
+
+\item El anillo de polinomios $k[x]$ es una $k$-álgebra.  El cuerpo $k$ se identifica con los polinomios de grado cero.  El general, cualquier anillo de polinomios, en un número finito o infinito de variables, es una $k$-álgebra.
+
+\item  Sea $I$ un ideal de $k[x]$.  Como $I$ no contiene a las constantes, podemos considerar que $k$ está contenido en $k[x]/I$ vía la proyección canónica, que restingida a $k$ es inyectiva.  Si el ideal $I$ es maximal, entonces es una extensión.
+
+
+\item Sean $A_1$y $A_2$ dos $k$-álgebras.  Definimos el morfismo
+$$
+\begin{array}{lccc}
+\varphi: & k & \lto &A_1 \times A_2 \\
+          & \lambda & \lto& (\lambda, \lambda)
+\end{array}
+$$
+Este morfismo dota al producto de anillos de  una estructura de\linebreak $k$-álgebra. 
+Muchas veces este álgebra se denota $A_1 \oplus A_2$ y se llama {\sf suma directa} \index{suma directa} de las álgebras.
+\item La identidad $\Id : k(x) \rightarrow k(x)$ proporciona una extensión evidente del cuerpo de fracciones racionales. Llamemos $\varphi: k(x) \rightarrow k(x)$ al único morfismo de cuerpos (propiedad universal del anillo de fracciones) que verifica $\varphi(x)=x^2$.  Esta es otra extensión, no tan evidente, de $k(x)$.  Es por razones como esta por lo que muchas veces se insiste en el morfismo y no se considera una extensión como una simple inclusión de cuerpos.
+
+\item Sea $i:\Q(\sqrt{2}) \rightarrow \R$ la inclusión canónica. Sea $j: \Q(\sqrt{2}) \rightarrow \R$ el morfismo $j(a+b\sqrt{2})= a-b\sqrt{2}$. Ambas son extensiones  y sin embargo no son isomorfas (pruébese que no existe ningún isomorfismo de cuerpos de $\R$ que haga conmutativo el diagrama).
+
+\end{itemize}
+
+
+\begin{defi}
+
+Dada una $k$-álgebra $A$, llamamos {\sf subálgebra} \index{subálgebra} a todo anillo $B \subset A$ que contenga a las constantes. Si ambos anillos son cuerpos se denomina \index{subextensión} {\sf subextensión}.
+
+\end{defi}
+
+Como toda subálgebra contiene a las constantes, el morfismo $k \rightarrow A$ da origen a un morfismo $k \rightarrow B$ y toda subálgebra adquiere de modo natural una estructura de $k$-álgebra. Es fácil observar que la intersección de una colección de subálgebras es de nuevo una subálgebra.  La subálgebra generada por un subconjunto $S \subset A$ es la intersección de todas las subálgebras que contienen a $S$.  La denotaremos por $k[S]$ (con corchetes).  La subálgebra $k[S]$ es un anillo que contiene por una parte al cuerpo $k$ y por otra al conjunto $S$.  Además cualquier anillo que contenga a esos dos conjuntos debe contener a $k[S]$.
+
+\begin{propo}
+
+La subálgebra $k[S]$ coincide con el anillo generado por el conjunto $k \cup S$.
+
+\end{propo}
+
+ En el caso de que $S$ sea un conjunto finito, $S= \{a_1,\dots, a_n\}$, se suele emplear la notación $k[a_1, \dots,a_n]$. En esta notación, el orden dado a los elementos carece de importancia.
+ 
+ \begin{defi}
+
+Un álgebra $A$ es de {\sf generación finita} \index{generación finita} si existe un conjunto finito $\{a_1,\dots,a_n\}$ tal que $A= k[a_1, \dots,a_n]$.
+
+\end{defi}
+
+\begin{propo}
+
+Dados dos elementos $a_1,a_2$ del álgebra $A$ se tiene que
+$$
+k[a_1][a_2]=  k[a_1,a_2]= k[a_2][a_1]
+$$
+
+\end{propo}
+
+\noindent{\bf Demostración.} En los tres casos el conjunto es igual al anillo generado por el subconjunto $k \cup \{a_1\} \cup \{a_2\}$. \fin
+
+
+\begin{cor}
+
+En general se cumple
+$$
+k[S_1][S_2]= k[S_1 \cup S_2]= k[S_2][S_1]
+$$
+siendo $S_1$ y $S_2$ subconjuntos arbitrarios.
+
+\end{cor}
+
+\begin{ob}
+
+Puede ocurrir que $k[S_1]= k[S_2]$ siendo $S_1 \neq S_2$. Distintos conjuntos generadores pueden dar lugar al mismo álgebra.
+
+\end{ob}
+
+
+Sea $A$ una $k$-álgebra.  Dado un conjunto finito $\{a_1,\dots,a_n\}$ de elementos de $A$, existe un único morfismo de $k$-álgebras
+$$
+\phi: k[x_1,\dots,x_n]\rightarrow A
+$$
+que verifica $\phi(x_i)=a_i$ (propiedad universal del anillo de polinomios). La imagen de este morfismo es una subálgebra que contiene a los elementos $a_i$. Pero por otra parte, cualquier subálgebra que contenga a dichos elementos debe contener a la imagen de $\phi$.  En definitiva, la imagen de $\phi$ coincide con la subálgebra $k[a_1,\dots,a_n]$. El mismo razonamiento, aunque con una notación un poco más complicada, es válido para conjuntos infinitos.
+
+\begin{cor}
+
+Toda álgebra $A$ es isomorfa a un cociente de un anillo de polinomios.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Tomamos un subconjunto $S$ tal que $k[S]= A$. El morfismo $\phi$ inducido es  epiyectivo y el teorema de factorización canónica nos da un isomorfismo deseado.
+Si el álgebra es de generación finita  podemos tomar un anillo con un número finito de variables.  \fin
+
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item Entendamos $\C$ como un álgebra sobre $\R$.  En este caso el conjunto $\{i\}$ genera todo el cuerpo $\C$.  En fórmulas tenemos $\R[i]= \C$.
+
+\item Consideremos a $\C$ como una $\Q$-álgebra.  El álgebra $\Q[i]$ coincide con el cuerpo $\Q(i)$.
+
+
+\item Sea $A= k[x]$.  Este álgebra es de generación finita puesto que basta tomar $S= \{x\}$.  Como vemos la notación que hemos adoptado para la subálgebra generada se adapta a nuestra notación del anillo de polinomios.
+
+\item   Cualquier álgebra de generación finita sobre $\Q$ es un cociente de un anillo de polinomios en un número finito de variables, que es siempre un conjunto numerable. Entonces $\R$ no puede ser de generación finita sobre $\Q$.
+
+\item Consideremos a $\R$ como un $\Q$-álgebra. La subálgebra generada por los elementos $\sqrt{2}$ y $\sqrt{3}$ debe contener a todos los elementos de la forma
+$$
+a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6}
+$$
+Pero este conjunto de elementos es ya una subálgebra y debe coincidir con $\Q[\sqrt{2},\sqrt{3}]$. El lector puede demostrar que además de ser subálgebra es subextensión, encontrando el inverso de cada elemento no nulo o aplicar la el resultado \ref{propo:dimensionfinita} que probaremos próximamente.
+
+\item Sea $\varphi: A_1 \rightarrow A_2$ un morfismo epiyectivo.  Si $A_1$ es de generación finita, entonces $A_2$ también.  Basta tomar como generadores de $A_2$ las imagenes por $\varphi$ de los generadores de $A_1$.
+
+
+\end{itemize}
+
+
+
+
+
+Si tenemos una extensión $k \rightarrow K$ y $S \subset K$ entonces el anillo de fracciones de $k[S]$ es un subcuerpo que contiene a $S$.  Es la mínima extensión que contiene a $S$.  Denotamos por $k(S)$ al anillo de fracciones de $k[S]$. El cuerpo $k(S)$ también se puede definir como la intersección de todos los cuerpos que contienen al conjunto $k \cup S$, pues todos estos cuerpos tienen estructura de $k$-álgebra por contener a $k$.
+
+
+
+
+\begin{defi}
+
+Una extensión $k \rightarrow K$ es de {\sf generación finita} \index{generación finita} (como cuerpo) si existe un conjunto finito $\{a_1, \dots, a_n\}$ tal que $K= k(a_1, \dots, a_n)$.
+
+\end{defi}
+
+
+Cuando hablamos de generación finita podemos referirnos al anillo generado o al cuerpo generado. Debemos tener cuidado y conocer a que tipo de generación finita nos referimos.  En general ello quedará claro por el contexto. Además, en casi todos los casos de interés, resulta que $k[a_1,\dots,a_n]$ es ya un cuerpo y coincide con $k(a_1, \cdots, a_n)$. Nuevamente el orden dado a los elementos es irrelevante y se cumplen las igualdades
+$$
+k(a_1)(a_2)=  k(a_1,a_2)= k(a_2)(a_1)
+$$
+y su generalización a subconjuntos.
+
+
+
+
+\begin{defi}
+
+Si la extensión puede ser generada por un solo elemento, se denomina \index{extensión!simple}{\sf extensión simple}. Cualquier elemento que genere dicha extensión, se llama {\sf elemento primitivo}\index{elemento!primitivo} de la extensión.
+
+\end{defi}
+
+  En general, cualquier extensión simple puede tener varios elementos primitivos.  A veces las extensiones simples aparecen camufladas como extensiones de generación finita del tipo $K=k(\alpha_1, \dots,\alpha_n)$, puesto que no es sencillo encontrar un elemento $\beta$ que cumpla $K=k(\beta)$. Por ejemplo, comprobemos  que $\Q(\sqrt{2}, \sqrt{3})$ es simple. Llamemos $\alpha=\sqrt{2}+\sqrt{3}$. Un sencillo cálculo demuestra que $\alpha^3-9\alpha=2\sqrt{2}$.  Dividiendo entre dos, comprobamos que $\sqrt{2} \in \Q(\alpha)$ y lo mismo con el otro elemento. La extensión dada coincide con $\Q(\alpha)$, que es simple.
+  
+   Aparte de este ejemplo, tenemos el {\sf teorema del elemento primitivo} que afirma, bajo condiciones muy generales, que toda extensión finita (ver la definición \ref{def:dimensionfinita}) es simple.
+   
+   
+   \begin{defi}
+   
+   Sea $k \rightarrow K$ una extensión y $L_1\subset K$ y $L_2 \subset K$ dos subextensiones. La mínima extensión que contiene a $L_1 \cup L_2$ se denomina {\sf compuesto} de $L_1$ y $L_2$ \index{compuesto} y se denota $L_1L_2$.
+   
+   \end{defi}
+   
+   Con nuestra antigua notación, el compuesto de dos subextensiones se denotaría $k(L_1 \cup L_2)$.  En la nueva notación está claro que el orden no influye en la construcción
+   $$
+   L_1L_2= L_2L_1
+   $$
+   
+ 
+   
+      
+   
+   \begin{ob}
+   
+   Sea $k \rightarrow K$ una extensión.  Sea $S$ el conjunto de todas las subextensiones de $K$.  En este conjunto existe una relación de orden dada por la inclusión conjuntista. El supremo de dos elementos $L_1$ y $L_2$ es justamente el compuesto $L_1L_2$.  El ínfimo es la intersección conjuntista. 
+   
+   
+   \end{ob} 
+   
+   
+
+
+\section{El grupo de Galois}
+
+
+La teoría de Galois estudia la relación entre las extensiones de un cuerpo y ciertos grupos asociados.  Estos grupos están formados por $k$-morfismos
+
+
+
+
+
+
+\begin{defi}
+
+Dada una extensión $k \rightarrow K$, el conjunto de los $k$-isomor\-fismos se llama {\sf grupo de Galois} de la extensión. Lo denotaremos $\mathrm{Gal}(K:k)$, aunque esta notación no es totalmente estandard.
+
+\end{defi}
+
+  Este grupo es de modo natural un subgrupo de $\mathrm{Aut}(K)$, pero la estructura de estos dos grupos puede diferir enormemente.
+
+
+
+
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item Dada la extensión $\R \rightarrow \C$ todo morfismo de cuerpos $\varphi: \C \rightarrow  \C$ debe cumplir ${\varphi(i)}^2=-1$.  Necesariamente $\varphi(i)= \pm i $. Si además es \mbox{$\R$-morfismo} se verifica $\varphi(a+bi) = a + b \varphi(i)$.  En un caso tenemos la identidad y en otro la conjugación compleja.  El grupo $\mathrm{Gal}(\C:\R)$ tiene dos elementos y es isomorfo a $\Z_2$.
+
+
+
+\item Sea $d$ un número complejo que no tenga raíz racional.  La extensión   $\Q \rightarrow\Q(\sqrt{d})$ tiene un grupo de Galois de orden $2$. 
+
+\item Si dos extensiones son isomorfas sus grupos de Galois también lo son. El recíproco no es cierto:  $\Q\rightarrow \Q(\sqrt{2})$ y $\Q\rightarrow \Q(\sqrt{3})$, tienen ambas grupo de Galois $\Z_2$, y sin embargo no son isomorfas.
+
+\item Sea $K$ un cuerpo de característica nula.  Todo automorfismo de $K$ debe ser la identidad sobre el subcuerpo $\Q$.  De este modo 
+$$
+\mathrm{Gal}(K:\Q)= \mathrm{Aut}(K)
+$$
+ En general, dado un cuerpo $K$, denotemos por $k_p$ su subcuerpo primo.  Tenemos la igualdad
+$$
+\mathrm{Gal}(K:k_p)= \mathrm{Aut}(K)
+$$
+
+
+\item Sea $k \rightarrow k(x)$. Existen $k$-morfismos $\varphi$ que verifican $\varphi(x)= x^n$.  Estos morfismos no son epiyectivos y no pertenecen al grupo de Galois.
+
+\item Consideremos la extensión $\Q \rightarrow \Q(\sqrt[3]{2})$, que es un subcuerpo de $\R$. Un morfismo queda totalmente conocido si sabemos como actua sobre un conjunto generador.  En nuestro caso el único generador es $\alpha=\sqrt[3]{2}$.  Como $\varphi(\alpha)^3=2$, necesariamente $\varphi(\alpha)$ es una raíz cúbica de 2.  Como las otras raices de 2 son complejas $\varphi(\alpha)=\alpha$ y el morfismo es la identidad.
+
+\item Analicemos en detalle como se calcula el grupo de Galois de la extensión $\Q \rightarrow \Q(\sqrt{2},\sqrt{3})$. Recordemos que los elementos del cuerpo se escriben de modo único en la forma
+$$
+a+b\sqrt{2}+c\sqrt{3}+d\sqrt{6}
+$$
+ Sea $\varphi$ un automorfismo. Como tal debe ser una aplicación $\Q$-lineal. Si llamamos  $\alpha=\sqrt{2}$, se tiene que $\varphi(\alpha)^2=2$. Necesariamente $\varphi(\alpha)$ es una de las raices de $2$, y se cumple $\varphi(\sqrt{2})=\pm\sqrt{2}$. El mismo razonamiento es válido para el otro generador. Por lo tanto solamente pueden existir, como mucho, cuatro automorfismos distintos. En este caso los cuatro existen.  El grupo de Galois tiene orden cuatro y es isomorfo (esto requiere un ligero cálculo) a $\Z_2 \times \Z_2$.
+
+\end{itemize}
+
+\begin{propo}
+
+$\mathrm{Gal}(\R:\Q)=\{Id\}$.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Todo elemento del grupo debe ser la identidad sobre $\Q$.  Además un elemento $\varphi$ de este grupo debe conservar el orden de $\R$.
+$$
+\text{Si } r \geq s \text{ entonces } r-s=a^2
+$$
+Aplicando el morfismo $\varphi$
+$$
+\varphi(r)-\varphi(s)=  \varphi(a)^2 \geq 0
+$$
+La densidad de $\Q$ en $\R$ permite concluir (si existe $r \in \R$ tal que $\varphi(r)\neq r$ basta tomar un racional entre ambos para obtener una contradicción). \fin 
+
+A partir de ahora emplearemos una notación que puede inducir a error. Por ello siempre denotaremos con la letra $H$ a los subgrupos del grupo de Galois y con la letra $L$ a las subextensiones. En la literatura la notación de estos conceptos no es estandard.
+
+\begin{propo}
+
+Dado un subgrupo $H \subset \mathrm{Gal}(K:k)$ el conjunto
+$$
+H'= \{ a \in K \text{ tales que } \varphi(a)= a \text{ para todo } \varphi \in H \}
+$$
+es  una subextensión de $K$.
+
+\end{propo}
+
+\noindent{\bf Demostración.} De modo inmediato se comprueba que $H' $ es un cuerpo.  Además si $a \in k $ entonces $\varphi(a)=a$ para todo elemento de $\mathrm{Gal}(K:k)$ y en particular para todo elemento $\varphi \in H$.  Tenemos que $k \subset  H' $ y naturalmente $H'  \subset K$. \fin
+
+
+\begin{defi}
+
+La subextensión $H' $ se llama {\sf cuerpo fijo}\index{cuerpo!fijo} de $H$. 
+
+\end{defi}
+
+
+
+\begin{propo}
+
+Sea $k \rightarrow K$ una extensión y  $L$ una subextensión.  Entonces $\mathrm{Gal}(K:L)$ es un subgrupo de $\mathrm{Gal}(K:k)$. Denotaremos dicho subgrupo por $L'$.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Recordemos que con este cambio de notación tenemos
+$$
+L'=\{\varphi \in \mathrm{Gal}(K:k) \text{ tales que } \varphi(x)=x \text{ para todo } x \in L\}
+$$
+Si un morfismo deja estables todos los elementos de $L$, también deja estables todos los elementos de $k$. \fin
+
+La siguiente proposición es prácticamente una tautología.
+
+
+
+\begin{propo}
+
+Sea $k\rightarrow K$ una extensión. Con la notación convenida se cumple:
+
+\begin{itemize}
+
+\vspace{-0.5\baselineskip}
+
+\item $K'=\{\mathrm{Id}\}$ y $k'=\mathrm{Gal}(K:k)$.
+
+\item Si $L_1 \subset L_2$ entonces $L_1' \subset L_2'$.
+
+\item $\{\mathrm{Id}\}'=K$.
+
+\item Si $H_1 \subset H_2$ entonces $H_1' \supset H_2'$.
+
+
+\end{itemize}
+
+\end{propo}
+
+\begin{ob}
+
+Esta proposición presenta una aparente falta de simetría y es ``lógico'' esperar que se cumpla también $\mathrm{Gal}(K:k)'=k$. Sin embargo esta propiedad es falsa.  Por ejemplo, el grupo $\mathrm{Gal}(\Q(\sqrt[3]{2}):\Q)$ solamente tiene un elemento y su cuerpo invariante asociado es $\Q(\sqrt[3]{2})$ y no $\Q$.
+
+\end{ob}
+
+La siguiente proposición no es tan inmediata, pero su demostración es también muy sencilla. Simplemente debemos tener claras las definiciones que hemos introducido.
+
+\begin{propo}
+
+Con las notaciones anteriores $H\subset H''$ y $L\subset L''$.
+
+\end{propo}
+
+La situación ideal se produce cuando en la anterior proposición en vez de la inclusión tuviesemos una igualdad. Pero ya hemos visto que esto no es siempre cierto.  Posteriormente veremos que las llamadas extensiones de Galois  verifican la igualdad para todo subgrupo y toda extensión.
+
+\begin{defi}
+
+Un subgrupo $H$ o una subextensión $L$ es {\sf cerrada} \index{subgrupo cerrado} \index{subextensión cerrada} si $H=H''$ o $L=L''$ respectivamente.
+
+\end{defi}
+
+
+\section{Álgebra Lineal}
+
+
+En toda $k$-álgebra $A$ existe una estructura natural de espacio vectorial sobre~$k$.  Denotemos por $i : k \rightarrow A$ el morfismo que da la estructura de\linebreak $k$-álgebra.  Definimos el siguiente producto escalar
+$$
+\begin{array}{ccc}
+k \times A & \lto & A \\
+(\lambda, a) & \lto & i(\lambda)\cdot a
+\end{array}
+$$
+Si $\lambda \in k$ y $a \in A$  el producto escalar $\lambda a$ es la multiplicación en el anillo de los elementos $i(\lambda)$ y $ a$.  Si $k$ es un subanillo de $A$ y el morfismo es la inyección canónica, la multiplicación escalar es simplemente la multiplicación del anillo.   Las propiedades de la multiplicación por escalares derivan de las propiedades del anillo y del hecho de que $i$ es morfismo.  
+
+\begin{defi}\label{def:dimensionfinita}
+
+Una $k$-álgebra $A$ es de {\sf dimensión finita} \index{dimensión finita} si lo es como espacio vectorial sobre $k$.  Su dimensión se denota $[A:k]$ y se llama {\sf grado}\index{grado!de una extensión} de $A$ sobre~$k$.
+
+\end{defi}
+
+Es costumbre simplificar la notación y llamar álgebras finitas a las álge\-bras de dimensión finita.
+
+\begin{ob}
+Estamos cometiendo el abuso de notación de sobreentender el morfismo.  Por ejemplo, en la extensión $\mathrm{Id}: k(x) \rightarrow k(x)$ el grado $[k(x):k(x)]$ es uno.  Pero si consideramos la extensión $\varphi: k(x) \rightarrow k(x)$ que cumple $\varphi(x)=x^2$, tenemos que el grado $[k(x):k(x)]$ es dos.  Si alguna vez pueden producirse este tipo de ambigüedades lo indicaremos explícitamente.
+
+\end{ob}
+
+\begin{cor}
+
+Toda subálgebra y todo cociente de un álgebra de dimensión finita tienen  dimensión finita.  Si dos álgebras $A_1$ y $A_2$ son de dimensión finita entonces $[A_1 \oplus A_2 :k]= [A_1:k]+[A_2:k]$.
+
+\end{cor}
+
+Si un álgebra es de dimensión finita, también es de generación finita como álgebra puesto que cualquier base actua como un conjunto generador (como $k$-álgebra). El recíproco sin embargo no es cierto: $k[x]$ es de generación finita, pero no de dimensión finita.
+
+
+
+
+
+\begin{propo}
+
+Todo cuerpo finito de característica $p$ tiene $p^n$ elementos.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Si un cuerpo $k$ tiene característica $p$, contiene al cuerpo $\Fp$.  Entonces $k$ es un espacio vectorial de dimensión finita sobre $\Fp$ y tiene $p^n$ elementos, donde~$n$ es el grado de la extensión. \fin
+
+\begin{propo}\label{propo:dimensionfinita}
+
+Sea $A$ una $k$-álgebra finita e íntegra. Entonces $A$ es un cuerpo.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Sea $a \in A$ no   nulo.  Consideramos la aplicación lineal
+$$
+\begin{array}{rccc}
+ \varphi: & A & \lto & A \\
+          & b & \lto & ab
+\end{array}
+$$
+Como $A$ es íntegra dicha aplicación es inyectiva y por estar en dimensión finita es epiyectiva y el elemento es invertible. \fin
+
+El anillo de polinomios es un álgebra íntegra que no es un cuerpo. La condición de  finitud es imprescindible para  la validez de la proposición.
+
+\begin{cor}
+
+Sea $S \subset K$. Si $k[S]$ es un álgebra de dimensión finita entonces $k[S]= k(S)$.
+
+\end{cor}
+
+\begin{cor}
+
+Sea $A$ un álgebra de dimensión finita.  Todo ideal primo no nulo de $A$ es maximal.  
+
+\end{cor}
+
+\noindent{\bf Demostración.} Sea $I$ un ideal primo.  El álgebra $A/I$ es íntegra y de dimensión finita.  Como $A/I$ es un cuerpo, el ideal $I$ es maximal.  \fin
+
+Si tenemos una $k$-álgebra $A$ de dimensión finita, tiene al menos un ideal maximal $\m$.  El cociente $A/\m$ es un cuerpo (llamado muchas veces \index{cuerpo!residual} {\sf cuerpo residual}) que contiene a $k$ y por lo tanto es una extensión finita.
+
+
+\begin{propo}
+\
+Sea $A$ un álgebra de dimensión finita.  El número de ideales maximales de $A$ es menor o igual que su dimensión.
+
+\end{propo}
+
+\noindent{\bf Demostración.}  Sea $\m_1,\dots, \m_j$ ideales maximales de $A$.  Por el teorema de los restos chinos se tiene un isomorfismo
+$$
+A/(\m_1\cap \dots \cap \m_j)=A/\m_1 \oplus \dots \oplus A/\m_j
+$$
+El lado izquierdo de la fórmula tiene dimensión menor o igual que la dimensión de $A$.  Cada uno de los sumandos de la derecha tiene al menos dimensión~1.  Necesariamente $j \leq \mathrm{dim}(A)$. \fin
+
+Recordemos de Teoría de Anillos que un anillo es reducido si no contiene elementos nilpotentes. Además, el conjunto de todos los elementos nilpotentes (el radical del anillo) coincide con la intersección de todos los ideales primos.  En el caso de las álgebras de dimensión finita, la intersección de sus ideales maximales es el radical del anillo.
+
+\begin{propo}
+
+Sea $A$ un álgebra de dimensión finita y sin radical. Entonces $A$ es isomorfa a una suma directa de extensiones finitas.
+
+\end{propo}
+
+\noindent{\bf Demostración.}  Sean $\m_1, \dots, \m_j$ el conjunto de ideales maximales de $A$.  Como el álgebra no tiene radical, la intersección de los ideales es $0$. Aplicando el teorema de los restos chinos
+$$
+A=A/(0)=A/(\m_1\cap \dots \cap \m_j)=A/\m_1 \oplus \dots \oplus A/\m_j
+$$
+obteniendose el resultado. \fin
+
+Todos estos resultados abstractos toman forma en los siguientes
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\vspace{-0.5\baselineskip}
+
+\begin{itemize}
+
+\item Sea $A=k[x]/(f)$, siendo $f$ un polinomio irreducible.  Entonces $A$ es una extensión. La extensión es trivial si y solo $f$ es de primer grado.
+
+\item Sea $f=g_1 \dots g_j$ la descomposición en factores irreducibles de un polinomio. Supongamos que ningún factor tiene multiplicidad. Por el teorema de los restos chinos
+$$
+A/(f)=A/(g_1) \oplus \dots \oplus A/(g_j)
+$$
+Ahora el álgebra $A/(f)$ es una suma directa de extensiones, y por lo tanto carece de radical.  Si todas las extensiones  son triviales, el polinomio descompone en factores lineales y tiene todas sus raices en el cuerpo $k$.  En general, el número de extensiones triviales que aparecen en su descomposición es igual al número de raices que posee el polinomio en el cuerpo.
+
+\item Sea $f=g^n$, siendo $g$ irreducible. Entonces el álgebra $A/(f)$ tiene elementos nilpotentes (la clase de $g$ es uno de ellos).  Sin embargo el estudio de las raices del polinomio $f$ es equivalente al estudio de las raices de $g$, que si da lugar a un álgebra reducida.
+
+\item Finalmente, sea $f= g_1^{n_1} \dots g_j^{n_j}$ la descomposición en factores.  El álgebra $A/(f)$ es reducida si y solo si $n_i=1$ para todo $i$.  Para el estudio de las raices $f$ podemos considerar el polinomio $g= g_1 \dots g_j$.
+
+\end{itemize}
+
+En muchas ocasiones en vez de  tratar con una sola extensión, debemos tratar con varias extensiones relacionadas entre si mediante la inclusión.  Llamamos {\sf torre de cuerpos}\index{torre de cuerpos} a la cadena $k \rightarrow K_1 \rightarrow K_2$.  Es una notación abreviada para hablar de tres extensiones, que son $k \rightarrow K_1$, $k \rightarrow K_2$ y $K_1 \rightarrow K_2$.
+
+\begin{propo}\label{propo:torre}
+
+Sea $k \rightarrow K_1 \rightarrow K_2$ una torre de cuerpos.  La extensión $k \rightarrow  K_2$ es finita si y solo si $k \rightarrow K_1$ y $K_1 \rightarrow K_2$ son finitas y en este caso se cumple
+$$
+[K_2: k] = [K_2:K_1][K_1:k]
+$$
+
+\end{propo}
+
+\noindent{\bf Demostración.} Sea $n= [K_2:K_1]$ y $m= [K_1:k]$.  De álgebra lineal sabemos que $K_2 \sim {K_1}^n$ y $K_1 \sim k^m$.  Sustituyendo $K_2\sim {(k^m)}^n \sim k^{mn}$.  \fin
+
+La fórmula anterior es también válida aún en el caso de que alguno de los grados sea infinito.
+
+\begin{ob}
+
+Sea $\{x_i\}$ una base de $K_2$ como $K_1$-espacio vectorial y sea $\{y_j\}$ una base de $K_1$ como $k$-espacio.  Entonces los productos $x_i y_j$ forman una base de la extensión $k \rightarrow K_2$.
+
+\end{ob}
+
+
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\vspace{-0.5\baselineskip}
+
+\begin{itemize}
+
+\item El cuerpo $\C$ tiene grado $2$ sobre $\R$.  Una base es $\{1,i\}$.
+
+\item Todo espacio vectorial de dimensión finita sobre $\Q$ es numerable.  Entonces $\R$ y $\C$ son extensiones de $\Q$ de grado infinito.
+
+\item  Denotemos por $k(x)$ al cuerpo de fracciones racionales.  Es una extensión de grado infinito, puesto que los polinomios son un subespacio de dimensión infinita. Sin embargo, recordemos que si es finitamente generada como cuerpo pues el conjunto $\{x\}$ genera dicho cuerpo.
+
+\item Sea $f$ un polinomio de grado $n$.  Entonces $k[x]/(f)$ es un álgebra de grado $n$.  Veámoslo.  Todo polinomio de grado mayor que $n$ es equivalente a un polinomio de grado menor que $n$.  Si $g$ es un polinomio de grado mayor que $n$, aplicando la división euclídea
+$g = cf+r$ y los polinomios $g$ y $r$ son equivalentes.  Sin embargo dos polinomios de grado menor que $n$ nunca pueden ser equivalentes.  Las imágenes de $1, x, \cdots, x^{n-1}$ forman una base.
+
+\item $[K:k]=1$ si y solo si $k$ y $K$ son isomorfos. Si consideramos que $k$ está contenido en la extensión se tiene la igualdad en vez del isomorfismo.
+
+\item Sea $k \rightarrow K$ una extensión de grado primo.  Entonces no puede existir ninguna torre $k \rightarrow L \rightarrow K$ salvo si $L=K$ ó $L=k$.
+
+
+\item Sea $k \rightarrow K$ una extensión. Todo $k$-automorfismo $\varphi: K \rightarrow K$ es una aplicación $k$-lineal y tenemos que $\mathrm{Gal}(K:k) \subset \mathrm{Gl}(K)$.  Podemos utilizar la maquinaria del álgebra lineal para estudiar los grupos de Galois. En particular  dos extensiones isomorfas tienen el mismo grado.  Sin embargo el recíproco no es cierto: $\Q(\sqrt{2})$ y $\Q(\sqrt{3})$ son ambas extensiones de $\Q$ de grado 2 y sin embargo no son isomorfas (un cuerpo posee raices cuadradas de 2 y el otro no).
+
+\item Sea $k \rightarrow K$ una extensión finita.  Todo $k$-morfismo $\varphi: K \rightarrow K$ es inyectivo y por estar en dimensión finita es epiyectvo.
+
+
+\end{itemize}
+
+
+
+\section{Tipos de extensiones}
+
+En esta sección empezaremos a estudiar la estrecha relación existente entre el estudio de las raices de los polinomios sobre un cuerpo $k$ y la estructura de  las extensiones de dicho cuerpo.
+
+Sea $ k \rightarrow K$ una extensión.  Dado un elemento $\alpha \in K$, se induce un morfismo de álgebras $\varphi_\alpha: k[x] \rightarrow K$.  Dicho morfismo es el único que cumple la condición $\varphi_\alpha(x)= \alpha$.  Recordemos que la imagen de dicho morfismo coincide con $k[\alpha]$, que  es el álgebra generada por el elemento $\alpha$.
+
+
+\begin{defi}
+
+Dada una extensión $k \rightarrow K$, un elemento $\alpha \in K$ es {\sf transcendente} (sobre $k$) \index{elemento!transcendente} si el morfismo $\varphi_\alpha$ es inyectivo.  Si el morfismo no es inyectivo decimos que $\alpha$ es un elemento \index{elemento!algebraico} {\sf algebraico} (sobre $k$).
+
+\end{defi}
+
+En general decimos que $\alpha \in K$ es algebraico o transcendente sobre $k$, sobreentendiendo el morfismo que define la extensión.
+
+Si $\varphi_\alpha$ es inyectivo, el álgebra $k[\alpha]$ es isomorfa al anillo de polinomios.  En este caso la extensión $k(\alpha)$ es isomorfa al cuerpo de fracciones racionales $k(x)$.  Como vemos este resultado es independiente del elemento transcendente que tomemos.  En este sentido todos los elementos transcendentes  son equivalentes.
+
+\begin{propo}
+
+Todas las extensiones simples transcendentes de $k$ son isomorfas a $k(x)$.
+
+\end{propo}
+
+Si $\alpha$ es algebraico, el núcleo de $\varphi_\alpha$ es un ideal primo del anillo de polinomios, puesto que la imagen del morfismo es íntegra.  Como en $k[x]$ todos los ideales son principales, dicho ideal está generado por  un polinomio, que debido a la primalidad del ideal, es irreducible.  Tomaremos siempre como generador el único polinomio que  tiene como coeficiente de mayor grado la unidad.  Denotaremos dicho polinomio por $m_\alpha$.
+
+
+\begin{defi} 
+
+El polinomio $m_\alpha$ es el {\sf polinomio mínimo} \index{polinomio!mínimo} de $\alpha$.
+
+\end{defi}
+
+
+
+
+
+El polinomio $m_\alpha$ pertenece al anillo $k[x]$, pero gracias al morfismo $k \rightarrow K$ también se puede considerar como un polinomio de $K[x]$.  En este sentido, tenemos que $\alpha$ es una raíz del polinomio $m_\alpha$ y además no existe ningún polinomio en $k$  de grado menor que tenga a $\alpha$ como raíz. Como $m_\alpha$ anula al elemento $\alpha$, también se suele llamar polinomio {\sf anulador}\index{polinomio!anulador} de $\alpha$ al polinomio mínimo. Recíprocamente, si existe un polinomio $f$ con valores en $k$ que tiene al elemento $\alpha$ como raíz, el elemento es algebraico y su polinomio mínimo es un divisor de $f$.
+
+
+\begin{propo}
+
+El polinomio mínimo de  $\alpha$ es el único polinomio irreducible y mónico que tiene como raíz al elemento dado.
+
+\end{propo}
+
+Normalmente y para no recargar la notación supondremos que $k \subset K$ lo que implica que $k[x] \subset K[x]$.
+
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\vspace{-0.5\baselineskip}
+
+\begin{itemize}
+
+\item Sea $k \subset K$ una extensión. Todo elemento  $\alpha \in k$ es algebraico sobre $k$ y su polinomio mínimo es $x-\alpha$. Un elemento $\alpha$ tiene un polinomio mínimo de primer grado si y solo si $\alpha$ está en el cuerpo base.
+
+\item El número $i$ es algebraico sobre $\R$ y su polinomio mínimo es $x^2+1$.  Este elemento también es algebraico sobre $\Q$.
+
+\item  $\sqrt{2}$ es algebraico sobre $\Q$ y su polinomio mínimo es $x^2-2$.
+
+\item La raíz $n$-ésima de la unidad, $\xi_n= e^{\frac{2\pi i}{n}}$, es algebraica. Un polinomio que tiene como raíz a $\xi_n$ es $x^n-1$.  Sin embargo este no es polinomio mínimo por ser reducible
+$$
+x^n-1=(x-1)(x^{n-1}+x^{n-2}+ \dots+ x+1)
+$$
+
+
+\item Los números $e$ y $\pi$ son transcendentes sobre $\Q$.  La demostración de estos resultados (debida a Hermite y Lindemann a finales del siglo 19)  no es elemental, pero la admitiremos.
+
+\item Consideremos la extensión $k \rightarrow k(x)$. El elemento $x$ es transcendente sobre $k$. Si $x$ es anulado por algún polinomio, dicho polinomio debe ser igual a cero y el morfismo es inyectivo.
+
+
+\item Si tenemos una torre de cuerpos $k \rightarrow L \rightarrow K$, dado un elemento $\alpha \in L$ podemos considerar dos polinomios mínimos, uno que pertenece a $k[x]$ y otro que pertenece a $L[x]$.  Los denotaremos por $m_{\alpha,k}$ y por $m_{\alpha, L}$.  Entonces el polinomio mínimo sobre $L$ divide al polinomio mínimo sobre $k$. El polinomio mínimo de $\sqrt{2}$ sobre $\Q$ es $x^2-2$ y sin embargo sobre $\R$ es $x-\sqrt{2}$.
+
+
+
+
+\end{itemize}
+
+En general, dado un elemento $\alpha \in K$, salvo en los casos sencillos, no es fácil encontrar el polinomio mínimo, o al menos un polinomio que anule a $\alpha$. Ilustraremos como se puede conseguir en casos ligeramente más complicados.
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\vspace{-0.5 \baselineskip}
+
+\begin{itemize}
+
+\item Sea $\alpha=\sqrt{2}+\sqrt{3}$. Dejamos una raiz ``sola'' en un miembro y elevamos al cuadrado
+$$
+(\alpha-\sqrt{2})^2=(\sqrt{3})^2
+$$
+De esta forma ``eliminamos'' una raiz. Repitiendo el argumento y pasando todo a un miembro deducimos que $\alpha$ satisface la ecuación polinómica
+$$
+\alpha^4-10\alpha^2+1=0
+$$
+Algún factor de este polinomio (o él mismo si es irreducible), es el polinomio mínimo de $\alpha$.
+
+\item Sea $K$ una extensión de dimensión finita. Dado $\alpha \in K$ consideramos el endomorfismo
+$$
+\begin{array}{rccc}
+h_\alpha:&K &\rightarrow &K \\
+&a & \rightarrow & \alpha a
+\end{array}
+$$
+El polinomio característico  de este endormorfismo, que se calcula desarrollando un determinante, tiene a $\alpha$ como raiz. Una ligera reflexión nos dice que el polinomio mínimo de este endomorfismo (que es un factor del polinomio característico), también anula a $\alpha$.  Es más, este polinomio mínimo (el del endomorfismo) coincide con el polinomio mínimo del elemento $\alpha$.  Así ambas notaciones no dan lugar a confusión. 
+
+\end{itemize}
+
+
+
+
+Tomemos un elemento $\alpha$ algebraico. El teorema de factorización canónica nos da un isomorfismo de anillos $\varphi_\alpha: k[x]/(m_\alpha) \rightarrow k[\alpha]$.  Como el primero es un cuerpo, necesariamente el segundo también es un cuerpo. Otra manera de ver que $k[\alpha]$ es un cuerpo es tener en cuenta que es un álgebra íntegra de dimensión finita. 
+
+
+
+Si $\alpha$ es un elemento algebraico, se tiene un isomorfismo entre los cuerpos $k[x]/(m_\alpha)$ y $k(\alpha)$.  La extensión $k \rightarrow k(\alpha)$ es finita si y solo si el elemento $\alpha$ es algebraico sobre $k$.   Resumiendo, se tiene la
+
+\begin{propo}
+
+Dada una extensión $k \rightarrow K$ son equivalentes:
+
+\begin{enumerate}[\indent 1) ]
+
+\vspace{-0.5 \baselineskip}
+
+\item El elemento $\alpha$ es algebraico sobre $k$.
+
+\item El grado $[k(\alpha):k]$ es finito.
+
+\item El morfimo $\varphi_\alpha: k[x] \rightarrow K$ no es inyectivo.
+
+\item Se tiene la igualdad $k[\alpha]= k(\alpha)$.
+
+\end{enumerate}
+
+\end{propo}
+
+
+Si se cumple alguna de la hipótesis de la proposición anterior, el grado del polinomio mínimo de $\alpha$ y el grado  de la extensión $k \rightarrow k(\alpha)$ coinciden.
+
+\begin{defi}
+
+Llamamos {\sf grado} del elemento \index{grado!de un elemento} $\alpha$ al grado de su polinomio mínimo.
+
+\end{defi}
+
+
+\begin{cor}
+
+Todo polinomio irreducible es el polinomio mínimo de al\-gún elemento.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Dado un polinomio irreducible $f$, tenemos la extensión $k \rightarrow k[x]/(f)$.  Si $ \alpha= \pi(x)$,  el polinomio mínimo de $\alpha$ es $f$. \fin
+
+\begin{cor}
+
+Toda extensión finita y simple es isomorfa a $k[x]/(f)$.
+
+\end{cor}
+
+
+El siguiente resultado será muy importante en el estudio de los campos de descomposición, que es tema del capítulo siguiente.
+
+
+\begin{cor}
+
+Sea $k \rightarrow K$ una extensión, $\alpha$ y $\beta$ dos elementos algebraicos con el mismo polinomio mínimo.  Existe un $k$-isomorfismo $\varphi: k(\alpha) \rightarrow k(\beta)$ que verifica $\varphi(\alpha)= \beta$.  El recíproco también es cierto.
+
+\end{cor}
+
+\noindent{\bf Demostración.} $\Rightarrow)$ Si $f$ es el polinomio mínimo de ambos elementos, entonces ambos cuerpos son isomorfos con $k[x]/(f)$. Un isomorfismo cumple $\phi(x)=\alpha$ y el otro cumple $\phi'(x)=\beta$. Tomamos $\varphi=\phi' \cdot \phi^{-1}$.
+
+$\Leftarrow)$ Sea $\varphi$ el isomorfismo que transforma $\alpha$ en $\beta$ y 
+$$
+m_\alpha=x^n+a_{n-1}x^{n-1}+ \dots + a_0
+$$
+ el polinomio mínimo.  Si aplicamos $\varphi$ a la ecuación
+ $$
+ \alpha^n+a_{n-1}\alpha^{n-1}+ \dots + a_0=0
+ $$
+ tenemos que $m_\alpha$ también anula a $\beta$.  Por ser irreducible $m_\alpha= m_\beta$. \fin
+
+
+\begin{defi}
+
+Sea $k \rightarrow K$ una extensión.  Dos elementos $\alpha$ y $\beta$ de $K$ son {\sf conjugados} \index{elementos conjugados} si tienen el mismo polinomio anulador.
+
+\end{defi}
+
+La relación de conjugación es de equivalencia.  Si el grado del polinomio $m_\alpha$ es $n$, el polinomio puede tener como  mucho $n$ raices.  El número de elementos de la clase de $\alpha$ nunca puede superar al grado de $\alpha$.
+
+Ya hemos visto que si $\alpha$ y $\beta $ son conjugados entonces $k(\alpha)$ y $k(\beta)$ son extensiones isomorfas entre sí, y además isomorfas con $k[x]/(f)$.  Si tenemos otra extensión $k \rightarrow K'$ y $\alpha'$ es solución del polinomio  $m_\alpha$, tenemos que también son isomorfas las extensiones $k(\alpha)$ y $k(\alpha')$.  
+
+\begin{propo}
+
+Dado un polinomio irreducible $f$ la subextensiones generadas por una cualquiera de sus raices son isomorfas entre sí.
+
+\end{propo}
+
+De este modo la subextensión generada por una raíz de $f$ es única, aunque siempre entendiendo que esta unicidad es salvo isomorfismos. Por ello es muy habitual hablar de la extensión $k \rightarrow k(\alpha)$ siendo $\alpha$ la raiz de un polinomio irreducible $f$, sin necesidad de suponer la existencia de una extensión $K$ que contenga a $\alpha$.
+
+
+\vspace{0.5\baselineskip}\noindent{\bf Ejemplos.}
+
+\vspace{-0.5\baselineskip}
+
+
+\begin{itemize}
+
+
+
+\item Dada la extensión $\R \rightarrow \C$, los números $i$ y $-i$ son conjugados puesto que su polinomio anulador es $x^2+1$.  En general $a+bi$ y $a-bi$ son conjugados y el lenguaje que empleamos se adapta al usual.
+
+
+\item Sea $k \subset K$ y $\varphi: K \rightarrow K$ un automorfismo que sobre $k$ es la identidad.  Si $\alpha$ tiene como polinomio mínimo $f$, entonces también es el polinomio mínimo de $\varphi(\alpha)$.  Las distintas raices de un polinomio irreducible están relacionadas por automorfismos.  Esta idea, expresada de momento de modo vago, es fundamental en la Teoría de Galois.
+
+
+\end{itemize}
+
+\section{Extensiones algebraicas}
+
+
+\begin{defi}
+
+Una extensión $k \rightarrow K$ es {\sf algebraica}\index{extensión!algebraica} si todo elemento de $K$ es algebraico sobre $k$.  En caso contrario la extensión se llama \index{extensión!transcendente} {\sf transcendente}.
+
+\end{defi}
+
+\begin{propo}
+
+Toda extensión finita es algebraica.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Daremos dos demostraciones de este resultado.
+
+
+
+El morfismo $\varphi_\alpha$ no puede ser inyectivo pues su dominio es un espacio vectorial de dimensión infinita y la imagen es de dimensión finita.
+
+
+
+Sea $n$ el grado de la extensión.  Dado $\alpha \in K$, el conjunto $\{1, \alpha, \alpha^2, \dots , \alpha^n\}$ no pueden ser linealmente independiente.  Existen constantes que verifican la ecuación
+$$
+c_01+c_1\alpha+c_2 \alpha^2+ \dots, c_n\alpha^n=0
+$$
+y existe un polinomio que anula a $\alpha$, que es entonces algebraico.  \fin
+
+El inverso de esta proposición es falso.  Veremos posteriormente que existen extensiones algebraicas que no  son de grado finito.
+
+\begin{cor}
+
+Si en $k$ existen polinomios irreducibles de grado mayor que uno, entonces $k$ tiene extensiones algebraicas.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Si $f$ es irreducible de grado $n$, entonces $k[x]/(f)$ es una extensión de grado $n$ y es algebraica.  \fin
+
+Si todos los polinomios irreducibles de $k$ son de grado $1$, el polinomio mínimo de cualquier elemento algebraico es  de la forma $x-\alpha$ con $\alpha \in k$ y todos los elementos algebraicos son a la vez elementos de $k$.  Esto nos dice que solo existen extensiones algebraicas del tipo $k \rightarrow k$.  Todas las extensiones algebraicas de $k$ son isomorfas a $k$.
+
+\begin{propo}
+
+Una extensión es finita si y solo si es algebraica y de generación finita.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Claramente si la extensión tiene grado finito es de generación finita y ya hemos visto que  es algebraica.
+
+
+
+Supongamos que $K=k(\alpha_1, \dots, \alpha_n)$.  Consideremos la siguiente torre de campos
+$$
+k \rightarrow k(\alpha_1) \rightarrow k(\alpha_1, \alpha_2) \rightarrow \cdots \rightarrow k(\alpha_1, \dots, \alpha_n)=K
+$$
+Como $\alpha_i$ es algebraico sobre $k$, también es algebraico sobre $k(\alpha_1, \dots, \alpha_{i-1})$  y cada uno de los eslabones es una extensión de grado finito.  La proposición~\ref{propo:torre} permite concluir que $k \rightarrow K$ es finita
+
+\begin{propo}
+
+Si $\alpha,\beta\in K$ son algebraicos sobre $k$, su suma, su producto, sus inversos y sus opuestos son también algebraicos.
+
+\end{propo} 
+
+\noindent{\bf Demostración.}   Si $\alpha$ y $\beta$ son algebraicos, la extensión $k \rightarrow k(\alpha,\beta)$ es finita y todos los elementos de $k(\alpha,\beta)$ son algebraicos.  En particular $\alpha+\beta$, $\alpha\beta$, $-\alpha$ y  $\alpha^{-1}$ son elementos de dicha extensión.  \fin
+
+
+\begin{cor}
+
+Toda subextensión generada por un subconjunto, posiblemente infinito, de  elementos algebraicos, es algebraica.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Sea $k \rightarrow K$ la extensión y $S$ un conjunto de elementos algebraicos sobre~$k$, de tal modo que $k(S)=K$.  Los elementos de $k(S)$ se forman con un número finito de operaciones y un número finito de elementos de $S$.   Dado $\beta \in k(S)$, existen elementos $\alpha_1, \dots, \alpha_n$ tales que $\beta \in k(\alpha_1, \dots, \alpha_n)$.  Como este último cuerpo es de grado finito, todos sus elementos son algebraicos y en particular $\beta$ es algebraico. \fin
+
+
+En realidad no es dificil observar que $k(S)=k[S]$ y los elementos de este último álgebra son polinomios en los elementos de $S$.
+
+
+
+
+
+
+
+
+Los elementos algebraicos son estables por suma, producto y toma de inversos.  Es natural ver que tienen estructura de cuerpo.
+
+\begin{cor}
+
+Sea $k \rightarrow K$ una extensión totalmente arbitraria.  Los elementos de $K$ algebraicos sobre $k$ forman una extensión  algebraica de $k$.
+
+
+\end{cor}
+
+\noindent{\bf Demostración.}   Denotamos por $\mathrm{Al}_K$ dicho conjunto, que viene definido como
+$$
+\mathrm{Al}_K= \{ \alpha \in K \text{ tales que } \alpha \text{ es algebraico sobre } k \}
+$$
+
+La estructura de cuerpo deriva de la proposición anterior y por definición todos los elementos del cuerpo $\mathrm{Al}_K$ son algebraicos.  \fin
+
+
+\begin{defi}
+
+El cuerpo $\mathrm{Al}_K$ se llama {\sf cierre algebraico} \index{cierre algebraico} de $k$ en $K$.
+
+\end{defi}
+
+Una extensión $k \rightarrow K$ es algebraica si su cierre algebraico coincide con~$K$.  El cierre algebraico es siempre una extensión algebraica.
+
+
+
+\vspace{0.5\baselineskip}\noindent {\bf Ejemplos.}
+
+\vspace{-0.5\baselineskip}
+
+\begin{itemize}
+
+
+\item La extensión $\R \rightarrow \C$ es algebraica y el cierre algebraico de $\R$ en $\C$ coincide con $\C$.
+
+\item Sea $k \rightarrow K$ una extensión arbitraria.  Cualquier cuerpo $L \subset K$ que sea algebraico sobre $k$ está contenido en $\mathrm{Al}_K$.  Podemos pensar que el cierre algebraico de $k$ en $K$ es la ``mayor'' de las extensiones algebraicas contenidas en $K$.
+
+
+
+\item La extensión $\Q \rightarrow \C$ no es algebraica, pues existen elementos transcendentes.  El cierre algebraico de $\Q$ en $\C$ lo denotamos por $\overline{\Q}$.  Veamos que dicha extensión no es finita.  Por el criterio de irreducibilidad de Eisentein, los polinomios del tipo $x^n-2$ son todos irreducibles sobre $\Q$.  Si $\alpha $ es un elemento de $\C$ que cumple $\alpha^n-2=0$ entonces es algebraico. El subcuerpo $\Q(\alpha) \subset \overline{\Q}$
+ tiene dimensión $n$ y la extensión $\Q \rightarrow \overline{\Q}$ no puede ser finita.
+
+\end{itemize}
+
+
+
+
+
+
+\begin{cor}
+
+Sea $k \rightarrow K$ una extensión algebraica.  Cualquier subálgebra $A$ de $K$ es un cuerpo.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Sea $\alpha \in A$.  El algebra que genera $k[\alpha]$ está contenida en $A$.  Pero como $\alpha$ es algebraico, tenemos que $k[\alpha]= k(\alpha)$.  De esta forma $k(\alpha) \subset A$ es un cuerpo y elemento $\alpha^{-1}$ pertenece a $k(\alpha)$ y por ende a $A$.  \fin  
+
+
+
+\begin{propo}
+
+Sea $k \rightarrow K_1 \rightarrow K_2$ una torre de cuerpos de tal manera que $k \rightarrow K_1$ y $K_1 \rightarrow K_2$ son  algebraicas.  Entonces $k \rightarrow K_2$ es algebraica.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Sea $\alpha \in K_2$.  Como $\alpha$ es algebraico sobre $K_1$, existe un polinomio en $K_1$ que anula al elemento $\alpha$.  Denotemos dicho polinomio por $c_0+ c_1x+ \dots+c_nx^n$. Naturalmente $\alpha$ es algebraico sobre el subcuerpo $k(c_0, \dots, c_n)$ pues existe un polinomio (el que hemos escrito) con coeficientes en dicho cuerpo que anula a $\alpha$. Los elementos $c_i$ pertenecen a $K_1$ por lo tanto son algebraicos sobre $k$.  Consideremos la torre de cuerpos
+$$
+k \rightarrow  k(c_0, \dots, c_n)\rightarrow k(c_0, \dots,c_n, \alpha)=k(c_0, \dots, c_n)(\alpha)
+$$
+Los eslabones son finitos y la extensión $k \rightarrow k(c_0, \dots, c_n,\alpha)$ es finita.  En particular el elemento $\alpha$ es algebraico sobre $k$.  \fin
+
+Esta última propiedad se llama {\sf transitividad} \index{transitividad} de la propiedad de ser algebraica.
+
+\section{Cuerpos algebraicamente cerrados}
+
+
+Es conocido que una de las mayores ventajas del cuerpo $\C$ sobre el cuerpo~$\R$ es que todo polinomio sobre $\C$ tiene al menos una raíz, cosa que no ocurre en los reales.  Generalicemos este concepto a cuerpos arbitrarios.
+
+\begin{defi}
+
+Un cuerpo $k$ es {\sf algebraicamente cerrado}\index{cuerpo!algebraicamente cerrado} si todo polinomio no constante en $k$ tiene una raíz.
+
+\end{defi}
+
+Si  todo polinomio tiene una raíz, resulta que todo polinomio de grado~$n$ tiene exactamente $n$ raices, alguna de las cuales puede estar repetida.  Los únicos polinomios irreducibles sobre un cuerpo algebraicamente cerrado son los de grado uno.  Pero entonces el cuerpo no puede tener extensiones algebraicas.
+
+\begin{propo}
+
+Dado un cuerpo $k$ son equivalentes:
+
+\begin{enumerate}[\indent 1) ]
+
+\item El cuerpo es algebraicamente cerrado.
+
+\item Todo polinomio de grado mayor que uno en $k$ tiene una raíz.
+
+\item Todo polinomio tiene en $k$ tantas raices como su grado.
+
+\item Los polinomios irreducibles son de grado uno.
+
+\item Si $k \rightarrow K$ es una extensión algebraica, entonces $K$ es isomorfo a $k$.
+
+\end{enumerate}
+
+\end{propo}
+
+Dado un cuerpo $k$ nos preguntamos por la existencia de una extensión $K$ algebraicamente cerrada.  Veremos que siempre existen extensiones de este tipo. Sin embargo dichas extensiones no tienen necesidad de ser isomorfas.  Sin embargo, si consideramos extensiones algebraicas tenemos la existencia y la unicidad.
+
+
+\begin{defi}
+
+Dado un cuerpo $k$,  llamamos {\sf cierre algebraico}\index{cierre algebraico} de $k$ a toda extensión $K$ que cumpla las  condiciones:
+
+\begin{itemize}
+
+\vspace{-0.5\baselineskip}
+
+\item $K$ es algebraicamente cerrado.
+
+\item La extensión $k\rightarrow K$ es algebraica.
+
+\end{itemize}
+
+\end{defi}
+
+El cierre algebraico de un cuerpo algebraicamente cerrado es él mismo. La extensión $\R \rightarrow \C$ proporciona un cierre algebraico de $\R$.  Construyamos ahora un cierre algebraico de los racionales. 
+
+\begin{propo}
+
+Sea $k \rightarrow K$ una extensión, de tal modo que $K$ es algebraicamente cerrado.  Entonces $\mathrm{Al}_K$ es un cierre algebraico de $k$.
+
+\end{propo}
+
+
+\noindent{\bf Demostración.} Sea $f$ un polinomio con coeficientes en $\mathrm{Al}_K$.    Sea $\alpha$ una raíz del polinomio en el cuerpo $K$. El cuerpo $\mathrm{Al}_K(\alpha)$ es una extensión algebraica de $\mathrm{Al}_K$ y por la transitividad de la condición de algebraico, también es algebraica sobre~$k$.  El elemento $\alpha$ es algebraico sobre $k$ y pertenece a $\mathrm{Al}_K$.  Todo polinomio de $\mathrm{Al}_K$ tiene una raíz en el cuerpo y es algebraicamente cerrado.  Naturalmente también es una extensión algebraica.  \fin
+
+
+
+
+\begin{cor}
+
+El cuerpo $\overline{\Q}$ es un cierre algebraico de $\Q$.
+
+\end{cor}
+
+
+
+
+Vemos que para construir un cierre algebraico basta encontrar una extensión algebraicamente cerrada. Si la extensión no es algebraica, consideramos el cierre algebraico y el nuevo cuerpo cumple los dos requisitos exigidos.
+
+
+La idea que vamos a seguir para construir un cuerpo algebraicamente cerrado que contenga a $k$ es la siguiente.  Es relativamente sencillo, utilizando el lema de Zorn, construir un cuerpo $k_1$ que contenga a $k$ y a todas las raices de los polinomios de $k[x]$.  Sin embargo este nuevo cuerpo  puede tener polinomios irreducibles de grado mayor que uno.  Por el mismo procedimiento podemos construir un cuerpo $k_2$ que contenga todas las soluciones de los polinomios de $k_1$.  Veremos que el conjunto (llamemos $k_0=k$)
+$$
+K=\bigcup_{n=0}^\infty k_n
+$$
+ puede ser dotado de una estrucura de cuerpo y que es un cierre algebraico del cuerpo base $k$ (y también de todos los cuerpos intermedios que nos han ido apareciendo).
+ 
+ \begin{lema}[Artin]
+ 
+ Sea $S$ una colección, posiblemente infinita, de polinomios con coeficientes en $k$.  Existe una extensión $K$ que contiene, al menos, una raiz de cada polinomio de $S$.
+ 
+ \end{lema}
+ 
+ \noindent{\bf Demostración.}  Para cada $f \in S$ construyamos una variable $x_f$.  Ahora consideramos el anillo de polinomios $A=k[x_f]$ con $f \in S$, que tiene tantas indeterminadas como elementos tiene $S$.  Recordemos que cualquier elemento de dicho anillo es una combinación \underline{finita}  de monomios en las variables dadas.
+ 
+ Sea $I\subset A$ el ideal generado por los elementos $f(x_f)$ con $f \in S$. En el anillo cociente $A/I$ se cumple de modo trivial que $f(x_f)=0$, luego todo polinomio de $S$ tiene una solución.   Sin embargo se presentan dos posibles problemas:
+ 
+ \begin{enumerate}
+ 
+ \item El anillo $A/I$ puede ser trivial y entonces no puede contener a $k$.
+ 
+ \item El anillo $A/I$ puede no ser un cuerpo.
+ 
+ \end{enumerate}
+ 
+ Para solucionar el primer problema basta ver que $I$ no coincide con $A$. Si ocurriese esto, una combinación finita de elementos de $I$ sería igual a la unidad
+ $$
+ 1= a_1 f_1+\dots +a_nf_n \text{ con } f_i \in I
+ $$
+ 
+ Si esta relación es cierta en un anillo de polinomios sobre  $k$, debe seguir siendo cierta sobre un anillo de polinomios sobre $L$, siendo $k \subset L$.  Por el teorema de Kronecker podemos encontrar $L$ de tal forma que contenga a todas las raices de $f_1, \dots, f_n$. Pero entonces la relación anterior no es posible que se de en dicho cuerpo, y por tanto no puede darse tampoco en $k$.
+ 
+ En general $I$ no es un ideal maximal, pero siempre podemos tomar un ideal maximal $\m$ que contenga a $I$. El anillo $K=A/\m$ es ya un cuerpo.  Dicho cuerpo contiene de modo natural a $k$. Además todo polinomio de $S$ tiene en $K$ al menos una raiz. Hemos solucionado ambos problemas. \fin
+ 
+ \begin{teo}
+ 
+ Todo cuerpo tiene un cierre algebraico.
+ 
+ \end{teo}
+ 
+ \noindent{\bf Demostración.} Sea $S=k[x]$.  Denotemos por $k_1$ al cuerpo obtenido aplicando el lema de  Artin. En $k_1$ todo polinomio de $k[x]$ tiene una raiz. Llamemos ahora $S=k_1[x]$ y aplicamos el lema de Artin, obteniendo un cuerpo, que denominamos $k_2$ y procedemos del mismo modo para todo natural. Obtenemos una colección de cuerpos $k_i$, cada uno encajado en el siguiente.  Llamemos $K$ a la unión de todos esos cuerpos. Para definir las operaciones en $K$, por ejemplo $\alpha+\beta$ tenemos en cuenta que tanto $\alpha$ como $\beta$ deben pertenecer a algún $k_i$. La operación en $K$ es la misma que en $k_i$.   Evidentemente esto es independiente del $i$ tomado, siempre y cuando contenga a los dos elementos. Es claro que con estas operaciones $K$ es un cuerpo, que es una extensión de $k$.  Solo falta ver que es algebraicamente cerrado.
+ 
+ Tomemos un polinomio $f \in K[x]$.  Como tiene un número finito de coeficientes, podemos suponer que dicho polinomio tiene todos sus coeficientes en un cierto $k_i$. Pero entonces dicho polinomio tiene una solución en $k_{i+1}$ y por lo tanto tiene una solución en $K$. \fin
+ 
+ \begin{ob}
+ 
+ Aunque existen otras demostraciones de la existencia de cierres algebraicos, en todas ellas, en algún momento, se tiene que apelar al Lema de Zorn o cualquiera de sus formas equivalentes.
+ 
+ \end{ob}
+ 
+ 
+
+ 
+ \section{Cuerpo de descomposición}
+ 
+ Consideremos el cuerpo $\Q$ de los racionales y el polinomio $x^2+1$.  Si intentamos hallar las raices de este polinomio dentro del cuerpo $\Q$, observamos que carece de ellas.  Si ahora consideramos el mismo polinomio pero sobre el cuerpo $\C$ (entendido como extensión de $\Q$) este polinomio si que posee dos raices, que son $i$ y $-i$.  El cuerpo $\C$ soluciona todos los problemas de todos los polinomios.  Pero para este caso particular no es necesario considerar todos los números complejos.   Existe un cuerpo intermedio entre $\Q$ y $\C$ donde el polinomio ya tiene todas las raices.  Ese cuerpo no es otro que $\Q(i)$.  Además, este cuerpo es ``mínimo'' en el siguiente sentido:  toda extensión $\Q \rightarrow  K\subset \C$ donde el polinomio tenga sus raices debe cumplir que $\Q(i) \subset K$. Pretendemos generalizar este tipo de resultados a cualquier cuerpo y a cualquier polinomio. 
+ 
+ 
+ 
+ 
+ Sea $f$ un polinomio sobre un cuerpo $k$.  Decimos que un elemento $\alpha \in k$ es una raíz del polinomio si $f(\alpha)=0$. El número de raices de un polinomio nunca supera al grado del polinomio.  Si aplicamos la división euclídea  obtenemos
+  $$
+ f= c(x-\alpha)+r
+ $$
+  donde el resto es una constante.  Sustituyendo $\alpha$ en dicha expresión, necesariamente $r=0$ y concluimos que $\alpha$ es raíz de $f$ si y solo si el polinomio es divisible por $(x-\alpha)$. 
+  
+  \begin{propo}
+  
+  Un polinomio $f$ sobre un cuerpo $k$ descompone como producto de factores lineales si y solo si todas sus raices pertenecen a $k$.
+  
+  \end{propo}
+  
+Si $f$ descompone en factores lineales tenemos una expresión del tipo
+$$
+f= a(x-\alpha_1) \cdots (x-\alpha_n)  
+$$
+donde $\alpha_i$ son las raices (que son únicas) y su número, contando multiplicidades, coincide con el grado del polinomio.
+
+\begin{ob}  
+
+Las raices de $f$ y de $a f$ son las mismas.  Para simplificar la notación a veces supondremos que el polinomio es unitario y que todos sus factores irreducibles son también unitarios. Cuando digamos que un polinomio factoriza o descompone, supondremos que lo hace en factores lineales.
+
+\end{ob}
+  
+  En el caso de que el polinomio no tenga todas las raices en el cuerpo, cuando descomponemos el polinomio como producto de irreducibles, debe existir algún componente que tenga grado mayor que $1$.  Nos concentramos ahora en los polinomios irreducibles que no sean lineales.
+  
+  
+  
+  
+  
+
+ Sea $f $ un polinomio irreducible sobre $k$ que no tenga ninguna raíz en el cuerpo.  Si $K$ es una extensión donde  el polinomio tiene una raíz $\alpha$, hemos visto que necesariamente $k(\alpha)$ es isomorfo con $k[x]/(f)$. Si $K'$ es otra extensión y $\beta$ es una raíz en $K'$ del mismo polinomio, existe un isomorfismo de álgebras $\varphi: k(\alpha) \rightarrow k(\beta)$ que cumple $\varphi(\alpha)= \beta$. Esto prueba la unicidad, salvo isomorfismos, de las extensiones generadas por raices de~$f$. La existencia de dichas extensiones  se prueba en la 
+ 
+ \begin{propo}
+ 
+ Sea $f$ un polinomio irreducible sobre un cuerpo $k$.  Existe una extensión finita $k \rightarrow K$ donde el polinomio tiene una raíz.
+ 
+ \end{propo}
+ 
+ \noindent{\bf Demostración.} Como $f$ es irreducible, el ideal que genera es maximal. Denotamos por~$K$ al anillo cociente $k[x]/(f)$.  Sabemos que la proyección canónica induce una extensión $\pi:k \rightarrow K$.  Si denotamos por $\alpha$ a la imagen por $\pi$ del elemento~$x$ se obtiene
+$$
+f(\alpha) = f(\pi(x))= \pi(f(x))=0
+$$
+pues el polinomio $f$ pertenece al núcleo de la proyección. La extensión es finita y su grado coincide con el grado del polinomio.\fin
+
+Pasamos ahora al caso general de los polinomios no necesariamente irreducibles.
+
+
+\begin{cor}[Teorema de \index{teorema!de Kronecker} Kronecker]
+
+Sea $f$ un polinomio arbitrario sobre un cuerpo $k$.  Existe una extensión finita donde $f$ tiene una raíz.
+
+\end{cor}
+
+ \noindent{\bf Demostración.} Sea $n$ al grado del polinomio. Expresamos $f$ como producto de polinomios irreducibles. Cada uno de los factores irreducibles tiene siempre grado menor o igual que $n$. Si el polinomio tiene algún factor lineal, ya tiene una raíz.  Si carece de factores lineales tomamos el primer factor irreducible de su descomposición.
+  La proposición anterior muestra que existe una extensión de grado menor o igual a $n$ donde el factor tiene una raíz.  De este modo el polinomio $f$ tiene también una raíz. \fin
+  
+  Si somos capaces de hallar una raíz de un polinomio, repitiendo el argumento  se pueden hallar todas las raices.
+  
+\begin{cor}[Kronecker]
+  
+  Dado un polinomio, existe  una extensión finita donde el polinomio descompone.
+  
+\end{cor}
+  
+ \noindent{\bf Demostración.} Sea $f$ el polinomio de grado $n$. Somos capaces de encontrar una raíz~$\alpha$  del  polinomio en una extensión $k \rightarrow K_1$ del cuerpo. En el cuerpo $K_1$ se cumple
+$$
+f  = (x-\alpha)f_1
+$$
+Ahora podemos encontrar una extensión de $K_1$ (y por tanto de $k$) donde $f_1$ tenga una raíz  e inductivamente concluimos.  Aplicando la ley de la torre de cuerpos, la extensión es finita.  Además su grado es siempre menor o igual que $n!$.    \fin
+
+\begin{cor}[Kronecker]
+  
+  Dado un conjunto finito de polinomios, existe  una extensión finita donde el polinomio descompone.
+  
+\end{cor}
+
+\noindent{\bf Demostración.} Basta considerar el polinomio  producto. \fin
+  
+  
+  Ahora que ya sabemos que para todo polinomio existe al menos una extensión donde tiene todas sus raices, pretendemos encontrar el cuerpo ``más pequeño'' donde esto ocurra.
+  
+\begin{defi}
+  
+Sea $f$ un polinomio sobre un cuerpo $k$.  Llamamos {\sf cuerpo de descomposición} \index{cuerpo!de descomposición} de $f$  a toda extensión $k \rightarrow K$ que verifique:
+
+\begin{itemize}
+
+\vspace{-0.5\baselineskip}
+
+\item El polinomio $f$ descompone  en $K$.
+
+\item El polinomio $f$ no descompone  en ningún subcuerpo $L \subset K$.
+
+\end{itemize}
+
+\end{defi}
+
+La existencia de cuerpos de descomposión queda garantizada por la 
+
+\begin{propo}
+
+Todo polinomio tiene un cuerpo de descomposión.
+
+\end{propo}
+
+
+ \noindent{\bf Demostración.} Utilizando los resultados anteriores, podemos encontrar una extensión $K$ donde el polinomio tiene todas sus raices.  Denotemos por $\alpha_1, \dots, \alpha_n$ las raices del polinomio, alguna de las cuales puede estar repetida.  El cuerpo $k(\alpha_1, \dots, \alpha_n)$ es un cuerpo de descomposión del polinomio, puesto que claramente contiene a todas las raices.  Además ningún subcuerpo puede contener a todas las raices pues si esto ocurriera las raices de $f$ en $K$ no serían únicas. \fin
+
+Si $K$ es un cuerpo de descomposición y $ \alpha_1, \dots,\alpha_n$ son las raices del polinomio en $K$, necesariamente se cumple
+$$
+K=k(\alpha_1, \dots, \alpha_n)
+$$
+Por ello se suele decir que un cuerpo de descomposición de $f$ es el generado por sus raices.  Como las raices de polinomios son de manera evidente elementos algebraicos se cumple también
+$$
+K=k[\alpha_1, \dots, \alpha_n]
+$$
+
+
+
+ \vspace{0.5\baselineskip} \noindent{\bf Ejemplos.}
+ 
+ \vspace{-0.5\baselineskip}
+
+\begin{itemize}
+
+
+\item Sea $x^2+1$ un polimomio sobre $\Q$.  Un cuerpo de descomposición es~$\Q(i)$.
+
+\item Sea $ax^2+bx+c$ un polinomio racional.  El cuerpo $\Q(\sqrt{b^2-4ac})$ es un cuerpo de descomposción.  Si da la casualidad de que $\sqrt{b^2-4ac}$ es un número racional, entonces el cuerpo de descomposición es simple\-mente~$\Q$.
+
+\item  Dos polinomios distintos pueden tener el mismo cuerpo de descomposición.  Como ejemplo valen los polinomios $x^2+5$ y $x^2+5x+5$.  En ambos casos el cuerpo $\Q(\sqrt{5})$ es un cuerpo de descomposición.
+
+
+\item Veamos el cuerpo de descomposición de $x^4-2$ sobre $\Q$. Las soluciones complejas de este polinomio son las raices cuartas de $2$:
+$$
+\alpha_1 = \sqrt[4]{2}\quad \alpha_2 = (\sqrt[4]{2})i \quad \alpha_3 = -\sqrt[4]{2} \quad \alpha_4 = -(\sqrt[4]{2})i
+$$
+El cuerpo de descomposición es $\Q(\sqrt[4]{2},i)$.  Si construimos la torre
+$$
+\Q\rightarrow \Q(\sqrt[4]{2}) \rightarrow \Q(\sqrt[4]{2}, i)
+$$
+el primer eslabón tiene dimensión $4$ y el segundo $2$ puesto que $i$ no está contenido en $\Q(\sqrt[4]{2})$ y tiene como polinomio mínimo $x^2+1$. Como conclusión $[\Q(\sqrt[4]{2},i):\Q]=8$.
+
+\item El conjunto de soluciones del polinomio entero $x^n-1 \in \Q[x]$ son las raices $n$-ésimas de la unidad.  En el plano complejo forman  los vértices de un polígono regular de $n$ lados. El conjunto de raices $n$-ésimas es un grupo cíclico y cualquier generador de dicho grupo se llama {\sf raíz primitiva}\index{raíz!primitiva} de la unidad.  Sea $\xi_n$ una raíz primitiva, entonces todas las demás raices $n$-ésimas se obtienen como potencias de ella y pertenecen a $\Q(\xi)$, que es un cuerpo de descomposición del polinomio $x^n-1$. Los cuerpos que se obtienen añadiendo una raíz primitiva de la unidad se llama \index{cuerpo!ciclotómico} {\sf cuerpos ciclótomicos}.
+
+\end{itemize}
+
+\begin{ob}
+
+El enfoque que hemos adoptado para presentar los cuerpos de descomposición de un polinomio es totalmente constructivo. Otros autores adoptan un enfoque distinto, que tiene sus ventajas.  Dado un polinomio $f \in k[x]$, tiene todas sus soluciones $\alpha_1, \dots, \alpha_n$ en la clausura algebraica $K$.  El cuerpo de descomposición es entonces $k(\alpha_1, \dots, \alpha_n)$. La existencia (y unicidad) del cuerpo de descomposición es entonces trivial. No es difícil, en este enfoque, definir el cuerpo de descomposición de una familia infinita de polinomios.
+
+\end{ob}
+
+
+
+
+\section{Unicidad del cuerpo de descomposición}
+
+Una vez vista la existencia del cuerpo de descomposición sería deseable poder demostrar que, en esencia, los cuerpos de descomposición son únicos.  La unicidad se obtiene salvo isomorfismo y son precisamente esos isomorfismos los que interesan en la teoría de Galois.
+
+La ideal de la demostración es sencilla.  Supongamos que $K$ y $K'$ son dos cuerpos de descomposición de un polinomio.  Entonces $K=k(\alpha_1, \dots,\alpha_n)$ y $K'=k(\beta_1, \dots,\beta_n)$ donde las letras  griegas designan las correspondientes raices.  Tomamos un factor $f_1$ irreducible del polinomio.  Renombrando si es necesario las letras, se puede suponer que $\alpha_1$ y $\beta_1$ son raices de dicho factor irreducible. Como $f_1$ es irreducible, las extensiones $k(\alpha_1)$ y $k(\beta_1)$ son isomorfas.  Inductivamente se  puede concluir.  Para realizar la demostración con todo lujo de detalles damos antes unos preliminares.
+
+Sea $\tau: K \rightarrow L$ un morfismo de cuerpos. A cada polinomio 
+$$
+f=a_nx^n + \dots +a_1x+a_0 \in K[X]
+$$
+le podemos asociar el polinomio
+$$
+\tau_*(f)=\tau(a_n) x^n+ \dots+ \tau(a_1)x+\tau(a_0) \in L[X]
+$$
+Tenemos definido de este modo un morfismo de anillos de $K[x]$ en $L[x]$ que es inyectivo.  Si $\tau $ es un isomorfismo, también lo es $\tau_*$ (a partir de ahora denotaremos por también po r $\tau$ al morfismo entre los anillos de polinomios).  
+
+  Dadas dos extensiones $k \rightarrow K$ y $k \rightarrow L$ y  un automorfismo $\tau: k \rightarrow k $, decimos que un morfismo de cuerpos $\varphi: K \rightarrow L$ es una {\sf extensión} de $\tau$ si $\varphi(a)=\tau(a)$ para toda constante $a \in k$. Si consideramos que $k$ está contenido en $K$ y en $L$, entonces la aplicación $\varphi$ al restringirla a $k$ coincide con $\tau$.  El caso más típico es considerar que $\tau$ es la identidad y entonces no hemos hecho más que volver a definir el concepto de morfismo de álgebras.
+  
+El concepto de extensión de un isomorfismo se expresa en diagramas
+$$
+\xymatrix{
+K \ar[r]^\varphi& L \\
+k\ar[u]\ar[r]^\tau& k\ar[u]
+}
+$$
+  
+  
+  
+  \begin{propo}
+  
+ Dado un  polinomio $f$ irreducible sobre $k$, sea \mbox{$\tau: k \rightarrow k$} un automorfismo. Sea $K$ una extensión donde $f$ tenga una raíz $\alpha$ y sea~$L$ una extensión donde $\tau(f)$ tenga una raíz $\beta$.  Existe un isomorfismo 
+  $\varphi: k(\alpha) \rightarrow k(\beta)$ que extiende a $\tau$ y que verifica $\varphi(\alpha)= \beta$
+ 
+ \end{propo}
+ 
+\noindent{\bf Demostración.} El isomorfismo $\tau$ produce un isomorfismo $\tau: k[x] \rightarrow k[x]$, de tal modo que los polinomios irreducibles están relacionados por dicho isomorfismo.
+ 
+ Este isomorfismo hace conmutativo el diagrama
+ $$
+ \xymatrix{
+ k[x] \ar[r]^{\tau} & k[x]\\
+ k\ar[u]\ar[r]^\tau & k\ar[u]
+ }
+ $$
+  
+Pasando al cociente se tiene un isomorfismo
+
+$$
+\xymatrix{
+k[x]/(f)\ar[r]^\varphi& k[x]/(\tau(f))\\
+k\ar[u]\ar[r]^\tau& k\ar[u]
+}
+$$
+
+  Teniendo en cuenta que $k[x]/(f) \sim k(\alpha)$ y que $k[x]/\tau_*f\sim k(\beta)$ se concluye la existencia del isomorfismo.  Debido a la construcción realizada se tiene que $\varphi(\alpha)= \beta$ y además extiende a $\tau$. \fin
+  
+
+  
+  \begin{propo}
+  
+  Dos campos de descomposición de un polinomio son $k$-isomorfos.
+  
+  \end{propo}
+  
+  
+  \noindent{\bf Demostración.}   Sea $K=k(\alpha_1,\dots,\alpha_n) $ y $L=k(\beta_1,\dots,\beta_n)$. Renombrando las raices si es necesario hemos visto que existe un isomorfismo 
+  $$
+  \tau_1: k(\alpha_1) \rightarrow k(\beta_1)
+  $$
+   que prolonga a la identidad.  Del mismo modo existe un isomorfismo 
+   $$
+   \tau_2:k(\alpha_1,\alpha_2) \rightarrow k(\beta_1,\beta_2)
+   $$
+    que prolonga a $\tau_1$ y por lo tanto prolonga a la identidad.  Repitiendo el proceso $n$ veces se obtiene el isomorfismo $\varphi$ buscado.  Además, si observamos dicha construcción veremos que el isomorfismo verifica \mbox{$\varphi(\alpha_i)= \beta_i$}.  \fin
+    
+    
+ \begin{cor}
+ 
+ Dado $f\in k[x]$, sea $\Sigma$ un cuerpo de descomposición. Si $L$ es otro cuerpo sobre el que $f$ descompone, existe un morfismo de $\varphi: \Sigma \rightarrow L$.
+ 
+ \end{cor}
+ 
+ \noindent{\bf Demostración.}  Sean $\alpha_1, \dots, \alpha_n$ las raices de $f$ en $L$.  El cuerpo generado por dichas raices es isomorfo a $\Sigma$, lo que permite crear el morfismo. \fin     
+    
+    
+\section{Cuerpos finitos}  
+    
+      Como aplicación de este teorema de unicidad veremos la estructura de los cuerpos finitos.  Necesitamos un pequeño resultado, que probaremos posteriormente (ver \ref{propo:derivada}), que nos asegura que el polinomio $x^n-x$ carece de raices múltiples.
+
+Sea $K$ un cuerpo finito.  Hemos visto que el cardinal de $K$ es $p^n$ donde $p$ es la característica de $K$.  El conjunto $K^*=K-\{0\}$ es un grupo, respecto a la multiplicación, que posee $p^n-1$ elementos.  El teorema de Lagrange sobre grupos finitos implica que cualquier elemento del grupo elevado a su orden es la unidad.  Tenemos entonces que todo elemento $a$ de $K^*$ verifica
+$$
+a^{p^n-1}=1 \Leftrightarrow a^{p^n-1}-1=0
+$$
+Todos los elementos de $K^*$ son raices del polinomio $x^{p^n-1}-1$. Si añadimos la raíz cero, resulta que todos los elementos de $K$, incluido el cero, son raices del polinomio $x^{p^n}-x$.  El cuerpo $K$ es entonces el cuerpo de descomposición de un polinomio (sobre el cuerpo primo) y es único salvo isomorfismo.
+
+De modo recíproco, si queremos construir un campo con $p^n$ elementos consideramos el polinomio $x^{p^n}-x$ sobre el cuerpo $\mathbb{F}_p$ y hallamos su cuerpo de descomposición $\Sigma$. Dentro de $\Sigma$ consideramos el conjunto $C$ formado por las raices del polinomio. Pero es fácil ver, utilizando el morfismo de Fröbenius, que el conjunto $C$ es ya un cuerpo y por lo tanto debe coincidir con $\Sigma$.  Este cuerpo tiene tanto elementos como raices tiene el polinomio, esto es $p^n$.
+
+\begin{defi}
+
+Para cada $p$ y cada entero $n$ existe un único cuerpo con $p^n$ elementos.  Denotamos dicho cuerpo por $\mathbb{F}_{p^n}$ (o también $\mathrm{GF}(p^n)$).
+
+\end{defi}
+
+\begin{ob}
+
+El polinomio $x^n-x$ sobre $\mathbf{F}_p$ tiene como cuerpo de descomposición $\mathbf{F}_{p^n}$.  Sin embargo existen otros polinomios que también tienen el mismo cuerpo de descomposición.
+
+\end{ob}
+
+Además de esto, el grupo multiplicativo del cuerpo es siempre un grupo ciclíco. Para probarlo debemos recordar algunas nociones de la teoría de grupos.
+
+
+
+Sea $G$ un grupo finito y $g$ un elemento. Denotemos por $(g)$ al subgrupo generado por dicho elemento. Llamamos {\sf orden de un elemento} \index{orden de un elemento}  $g$ al cardinal del grupo que genera. Por lo tanto $g$ elevado a su orden es el elemento neutro. Ningún numero natural menor posee dicha propiedad.  Llamamos {\sf exponente} del grupo $G$ al mínimo común múltiplo de los órdenes de sus elementos. Cualquier elemento del grupo elevado al exponente del grupo es necesariamente la unidad y este número es el menor de los que presentan dicha propiedad. En general, dado un grupo arbitrario, no es necesario que exista un elemento cuyo orden coincida con el exponente del grupo. Sin embargo si es cierto en los grupos abelianos.
+
+\begin{propo}
+
+Si $G$ es abeliano, existe un elemento cuyo orden coincide con el exponente del grupo.
+
+\end{propo}
+
+\noindent{\bf Demostración.}  Sea $p_1^{a_1} \dots p_n^{a_n}$ la descomposición en factores del exponente del grupo. Como el exponente se obtiene a través del mínimo común múltiplo, deben existir elementos $g_i$ cuyo orden sea múltiplo de $p_i^{a_i}$.  Tomando potencias de estos elementos, podemos encontrar elementos $h_i$ cuyo orden sea exactamente $p_1^{a_i}$.  El elemento $h_1 \dots h_n$ verifica el enunciado. \fin
+
+\begin{cor}
+
+Si $G$ es abeliano y su exponente coincide con su cardinal, entonces el grupo es cíclico.
+
+\end{cor}
+
+\begin{cor}
+
+Si $k$ es un cuerpo finito, $k^*$ es un grupo cíclico.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Si $k$ tiene $q$ elementos, los elementos no nulos son raices del polinomio $x^{q-1}-1$. Aunque algunos elementos pueden ser raices de un polinomio $x^{h}-1$ de grado menor, no todos pueden cumplirlo, pues dicho polinomio tendría mas raices que su grado.  Necesariamente hay un elemento de grado $q-1$ y el subrupo que genera debe coincidir con $k^*$. \fin 
+
+Como los subgrupos de los grupos cíclicos son también cíclicos obtenemos
+
+\begin{cor}
+
+Si $k$ es finito, cualquier subgrupo de $k^*$ es cíclico.
+
+\end{cor}
+
+El siguiente resultado es el teorema del elemento primitivo, pero válido únicamente para cuerpos finitos.
+
+\begin{cor} Toda extensión $k \rightarrow K$ donde $K$ es finito es simple.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Sea $\theta$ un generador del grupo $K^*$. Es claro que $k(\theta)$ debe coincidir con $K$. \fin
+
+Por completitud, enunciaremos otras propiedades, que son corolarios evidentes de la teoría de Galois que analizaremos en próximos capítulos.
+
+\begin{itemize}
+
+
+
+\item Todo automorfismo del cuerpo $\mathbf{F}_{p^n}$ es una potencia del morfismo de Fröbenius.
+
+\item Los subcuerpos de $\mathbf{F}_{p^n}$ son de la forma $\mathbf{F}_{p^r}$, donde $r$ divide a $n$.
+
+\end{itemize}
+
+\section{Extensiones normales}
+
+\begin{defi}
+
+Una extensión $k \rightarrow K$ es {\sf normal} \index{extensión!normal} si todo polinomio irreducible $f \in k[x]$ que tiene una raíz en $K$, descompone en factores lineales en~$K$.
+
+\end{defi}
+
+Si la extensión es normal, todo polinomio irreducible sobre $k$ que tenga una raíz, necesariamente tiene todas sus raices en $K$, alguna de las cuales puede estar repetida. Los polinomios de $k$ que tienen raices en $K$ son precisamente los polinomios mínimos de los elementos de $K$. Por ello el siguiente corolario se toma muchas veces como definición de extensión normal.
+
+\begin{cor}
+
+La extensión $k \rightarrow K$ es normal si todo polinomio míni\-mo~$m_\alpha$, con $\alpha \in K$, descompone en factores lineales en $K$.
+
+\end{cor}
+
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item La extensión $\R \rightarrow \C$ es normal, pues todo polinomio, irreducible o no, descompone en $\C$.  Este razonamiento sirve para cualquier extensión $k \rightarrow K$, donde $K$ sea algebraicamente cerrado.
+
+\item La extensión $\Q \rightarrow \R$ no es normal.  El polinomio $x^3-2$ es irreducible sobre $\Q$ y tiene una raíz real, que denotamos por $\sqrt[3]{2}$.  Sin embargo el polinomio no descompone en factores lineales en $\R$ por tener dos raices complejas conjugadas.
+
+\item Sea $\alpha$ la raíz cúbica real de $2$. Por el mismo motivo que antes la extensión $\Q\rightarrow \Q(\alpha)$ no es normal.
+
+\end{itemize}
+
+
+\begin{propo}
+
+Toda extensión finita y normal es un cuerpo de descomposición.
+
+\end{propo}
+
+
+\noindent{\bf Demostración.} Sea $k \rightarrow K$ la extensión.  Como es finita podemos encontrar elementos algebraicos $\alpha_1, \dots, \alpha_n$ tales que $K= k(\alpha_1, \dots, \alpha_n)$.
+
+Denotamos por  $m_{\alpha_i}$ a los polinomios mínimos de los generadores y por $f$ al producto de todos ellos
+$$
+f= m_{\alpha_1} \cdots m_{\alpha_n}
+$$
+Por definición, $\alpha_i$ es raíz de $m_{\alpha_i}$ y como la extensión es normal, el polinomio $m_{\alpha_i}$ descompone en factores lineales en $K$. De esta forma, $f$ también descompone en factores lineales en $K$.  Como $K$ está generado por raices de $f$, es el cuerpo de descomposición de $f$. \fin
+
+El resultado que acabamos de demostrar es ciertamente sencillo. Su recíproco también es cierto aunque tiene alguna complicación más.
+
+\begin{propo}
+
+Todo cuerpo de descomposición es una extensión finita y normal.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Sabemos que todo cuerpo de descomposición es de grado finito y además ese grado está acotado por $n!$, siendo $n$ el grado del polinomio.
+
+
+Supongamos que $k \rightarrow K$ es un cuerpo de descomposición de un cierto polinomio $f$. 
+  Tomamos un polinomio $g$ sobre $k$ que sea irreducible. Para demostrar este resultado consideramos un cuerpo auxiliar, que será el cuerpo de descomposición de $fg$. Lo denotaremos por $L$. Si  $\theta_1, \dots, \theta_s$ son las raices del polinomio $g$, veremos que todas las extensiones $K \rightarrow K(\theta_i)$ tienen el mismo grado.  Si el polinomio $g$ tiene una raíz en $K$, por ejemplo $\theta_1$, se tiene que $[K(\theta_i):K]=1$  y todas las raices pertenecen a $K$. 
+  
+  
+
+Denotemos por $\theta_1$ y $\theta_2$ dos raices arbitrarias del polinomio $g$ en el cuerpo~$L$.   Con ayuda de estas raices construimos las torres
+$$
+k \rightarrow k(\theta_i) \rightarrow K(\theta_i) \rightarrow L
+$$
+Además tenemos de modo evidente la torre
+$$
+k \rightarrow K \rightarrow K(\theta_i)
+$$
+
+
+
+Tenemos dos formas distintas de llegar desde el cuerpo $k$ al $K(\theta_i)$. Aplicando la propiedad de la torre de cuerpos
+$$
+[K(\theta_i):k(\theta_i)][k(\theta_i):k]=[K(\theta_i):k]=[K(\theta_i):K][K:k]
+$$
+Ahora debemos tener en cuenta dos observaciones:
+
+\begin{itemize}
+
+\item Las extensiones $k \rightarrow k(\theta_1)$ y $k\rightarrow k(\theta_2)$ son isomorfas, por obtenerse de $k$ añadiendo una raíz de un polinomio irreducible.
+
+\item La extensión $k(\theta_1) \rightarrow K(\theta_1)$ es un cuerpo de descomposición del polinomio $f$. Lo mismo con la otra extensión.  Como los cuerpos base son isomorfos y el polinomio $g$ es el mismo en ambas, necesariamente son isomorfas y tienen el mismo grado.
+
+\end{itemize}
+
+
+De estos razonamientos se desprende fácilmente que $[K(\theta_i):K]$ es independiente de la raíz considerada. \fin
+
+
+Como conclusión tenemos que las ampliaciones normales y finitas son simplemente los cuerpos de descomposición.  Supondremos de ahora en adelante que cuando hablemos de extensión normal, también será finita.
+
+\begin{ob}
+
+Utilizando la clausura algebraica hemos definido el cuerpo de descomposición de un colección infinita de polinomios.  En este caso, toda extensión normal, sea o no de dimensión finita, es el cuerpo de descomposición de un conjunto de polinomios. 
+
+\end{ob}
+
+Utilizando que una extensión normal no es más que un cuerpo de descomposición, podemos dar nuevas versiones de algunos resultados ya conocidos.
+
+\begin{cor}
+
+Sea $k \rightarrow K$ una extensión normal y $L$ un cuerpo intermedio. Entonces $L \rightarrow K$ es normal.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Si $f\in k[x]$ tiene como cuerpo de descomposición $K$, entonces el mismo polinomio, pero con coeficientes en $L$, también tiene como cuerpo de descomposición $K$. \fin
+
+\begin{cor}
+
+Sea $k \rightarrow K$ una extensión normal.  Sea $L$ un cuerpo intermedio y $\tau: L \rightarrow L$ un automorfismo.  Existe un automorfismo \mbox{$\varphi: K \rightarrow K$} que prolonga a $\tau$.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Hemos visto que $L \rightarrow K$ es normal y es un cuerpo de descomposición.  Cualquier automorfismo de $L$ se prolonga a un automorfismo del campo de descomposición. \fin
+
+
+
+\begin{cor}
+
+Sea $k \rightarrow K$ normal y $\alpha_1$ y $\alpha_2$ dos raices de un polinomio irreducible sobre $k$.  Entonces existe un morfismo $\varphi$ que cumple $\varphi(\alpha_1)=\alpha_2$.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Tenemos que $k(\alpha_1)$ y $k(\alpha_2)$ son isomorfismos.  Como $K$ es normal, el isomorfismo se puede prolongar. \fin
+
+\section{Separabilidad}
+
+
+Dos polinomios $f$ y $g$ son primos entre sí, cuando su máximo común divisor sea $1$.  Si los polinomios pertenecen a un cuerpo $k$ es de esperar que esos polinomios puedan dejar de ser primos en alguna extensión $K$, debido a que en dicha extensión ``hay más polinomios'' y alguno de los nuevos polinomios podría dividir a ambos.  Sin embargo esta ideal es falsa.  Si son primos sobre un cuerpo $k$, lo son sobre cualquier extensión, pues el máximo común divisor se calcula por el algoritmo de Euclides, que utiliza solamente polinomios de $k$.  En particular, si dos polinomios son primos, no tienen ninguna raíz común.  Recíprocamente, si tienen una raíz común $\alpha$, entonces $(x-\alpha)$ divide a ambos polinomios y no pueden ser primos.  Pero además, por la discusión anterior, no pueden tener raices comunes en ninguna extensión.
+
+Si $\alpha$ es una raíz de $f$, la multiplicidad de la raíz es el único entero $m$ que cumple que $(x-\alpha)^m$ divide a $f$ y $(x-\alpha)^{m+1}$ no divide a $f$. Si $m=1$ la raíz se llama \index{raíz!simple} {\sf simple}, y si $m$ es mayor que $1$ se dice que es una raíz \index{raíz!múltiple} {\sf múltiple}.
+
+\begin{defi}
+
+Un polinomio irreducible se dice que es {\sf separable}\index{polinomio!separable} si no tiene raices múltiples en su cuerpo de descomposición.
+
+\end{defi}
+
+Si tiene raices múltiples en alguna extensión, debe tener raices múltiples en su cuerpo de descomposición. De este modo sus raices son todas distintas, independientemente de la extensión. 
+
+\bigskip
+
+Para comprobar que un polinomio irreducible es separable, lo más cómodo es utilizar el concepto de derivada.
+
+\begin{defi}
+
+Dado el polinomio $f= a_nx^n+ \dots+ a_1+a_0$, llamamos derivada de $f$ y denotamos $Df$ al polinomio
+$$
+Df= n a_nx^{n-1}+ (n-1)a_{n-a}x^{n-2}+ \dots+ a_1
+$$
+
+\end{defi}
+
+Las propiedades de la derivada de polinomios sobre cualquier cuerpo son similares las propiedades conocidas del Análisis y se deducen inmediatamente a partir de la definición. Enumeremos las que nos interesan.
+
+\begin{itemize}
+
+\item $D(f+g)= Df+Dg$.
+
+
+\item $D(fg)=(Df)g+f(Dg)$
+
+\item $D (\lambda f) = \lambda Df$ siendo $\lambda $ un escalar.
+
+\item $D(f^n)= nD(f)^{n-1}$
+
+\end{itemize}
+
+La diferencia principal con el Análisis estriba en que $D(f)$ puede ser nula sin ser $f$ un polinomio constante.  Esto solo puede ocurrir si la característica es positiva
+
+
+\begin{propo}
+
+Sea $k$ un cuerpo de característica $p$. Un polinomio $f$ tiene derivada nula si y solo si todos sus monomios tienen como grado un múltiplo de $p$.
+
+\end{propo}
+
+\noindent{\bf Demostración.}  Sea $ax^{pn}$ un monomio cuyo grado es un múltiplo de $p$.
+$$
+D(ax^{pn})= (pn)ax^{pn-1}=0ax^{pn-1}=0
+$$
+\smallskip
+
+Si queremos que $D(f)=0$, debe ocurrir lo mismo para cada monomio de los que consta $f$
+$$
+D(x^n)=nx^{n-1}=0 \Leftrightarrow p \text{ divide a } n
+$$
+y $f$ es un polinomio cuyos monomios tiene siempre como grado un múltiplo de $p$. \fin
+
+
+\begin{propo}
+
+Un polinomio $f \in k[x]$ tiene raices múltiples (en su cuerpo de descomposición) si solo si $f$ y $Df$ no son primos.
+
+\end{propo}
+
+\noindent{\bf Demostración.} Trabajaremos en en el cuerpo de descomposición del polinomio $ f \cdot Df$ donde tanto $f$ como su derivada descomponen en factores lineales.
+
+
+\smallskip
+
+$\Rightarrow)$ Sea $\alpha$ una raíz múltiple de $f$. Podemos escribir $f$ como
+$$
+f= (x-\alpha)^m g(x)
+$$
+Derivando
+$$
+Df= m(x-\alpha)^{m-1}g(x)+(x-\alpha)^mDg
+$$
+y $\alpha$ es también raíz de la derivada. Como tienen una raíz común $f$ y $Df$ no pueden ser primos.
+
+
+$\Leftarrow) $ Si $f$ y $Df$ no son primos tienen algún factor común.  Ese factor común debe descomponer en factores lineales en el cuerpo de descomposición en el que estamos trabajando. Por lo tanto $f$ y $Df$ tienen una raíz común.
+Sea $\alpha$ una raíz común de $f$ y $Df$. Entonces
+
+\begin{eqnarray*}
+f &=&(x-\alpha)g(x) \\ 
+Df&=&(x-\alpha) h(x)
+\end{eqnarray*}
+Derivando
+$$
+Df= g(x)+(x-\alpha)Dg
+$$
+Tomando valores para $x= \alpha$ obtenemos que
+$$
+D(f(\alpha)=g(\alpha)
+$$
+y $g(x)$ tiene también como raíz $\alpha$. Resulta que $g(x)=(x-\alpha)g_1(x)$
+$$
+f= (x-\alpha)(x-\alpha)g_1
+$$
+y $\alpha$ es raíz múltiple. \fin
+
+Hemos utilizado un cuerpo de descomposición para probar la proposición.  Pero para comprobar que un polinomio tiene raices múltiples no es necesario ninguna extensión.  Simplemente hallamos su derivada y el máximo común divisor, que son operaciones que se realizan sin utilizar cuerpos de descomposición.
+
+\begin{cor}
+
+Si la derivada de un polinomio irreducible no es nula, el polinomio es separable.
+
+\end{cor}
+
+\noindent{\bf Demostración.} Si $f$ es irreducible de grado $n$, su derivada es siempre de grado menor.  Necesariamente son primos y $f$ no posee raices múltiples. \fin
+
+\begin{cor}
+
+Si la característica es nula todo polinomio irreducible es separable.
+
+\end{cor}
+
+
+
+El caso de los polinomios que no son irreducibles se estudia en base a los irreducibles.
+
+\begin{defi}
+
+Un polinomio, no necesariamente irreducible, es {\sf separable}\index{polinomio!separable} si sus factores son polinomios separables.
+
+\end{defi}
+
+Por lo tanto, los polinomios separables que no sean irreducibles, si pueden poseer raices múltiples.
+
+\begin{defi}
+
+Una extensión $k \rightarrow K$ es separable si el polinomio mínimo de todo elemento de $K$ es separable.
+
+\end{defi}
+
+
+\begin{propo}
+
+Sea $k \rightarrow K$ una extensión separable. Si $L$ es un cuerpo intermedio, entonces $k \rightarrow L$ y $L \rightarrow K$ son separables.
+
+\end{propo}
+
+\noindent{\bf Demostración.} La extensión $k \rightarrow L$ es separable de modo evidente. Si $m_\alpha$ es un polinomio separable para $\alpha \in K$, necesariamente ocurre lo mismo para los elementos de $L$.
+
+\smallskip
+
+Dado $\alpha \in K$, el polinomio mínimo sobre $L$ de $\alpha$ es siempre un divisor del polinomio mínimo de $\alpha$ sobre $k$. Si este último no tiene ninguna raíz múltiple, ningún divisor suyo puede tener raices múltiples. \fin
+
+\section{Polinomios irreducibles sobre $\Q$}
+
+Pretendemos dar condiciones necesarias para demostrar que un  polinomio es irreducible sobre $\Q$.  El lema de Gauss nos permitirá estudiar únicamente el caso de los polinomios con coeficientes en el anillo $\Z$, que es más sencillo.
+
+\begin{propo}
+
+Sea $a_nx^n+ \dots+a_1x+a_0$ un polinomio con coeficientes enteros.  Si $\alpha/\beta$ es una fracción irreducible que es raíz de este polinomio necesariamente $\alpha$ divide al término independiente $a_0$ y $\beta$ divide al término de mayor grado $a_n$.
+
+\end{propo}
+
+\dem
+
+Como $\alpha / \beta$ es raíz del polinomio se cumple la ecuación
+$$
+a_n\frac{\alpha^n}{\beta^n}+ a_{n-1}\frac{\alpha^{n-1}}{\beta^{n-1}} \dots+ a_1 \frac{\alpha}{\beta}+a_0=0
+$$
+Para quitar denominadores multiplicamos dicha expresión por $\beta^n$
+$$
+a_n\alpha^n+ a_{n-1}\alpha^{n-1}\beta+ \dots + a_1\alpha \beta^{n-1}+a_0\beta^n=0
+$$
+Sacando factor común $\alpha$ de todos los términos, salvo el último
+$$
+\alpha(\text{número entero})= -a_0 \beta^n
+$$
+y $\alpha$ divide al producto $a_0 \beta^n$.  Como $\alpha$ es primo con $\beta$, necesariamente $\alpha$ divide a $a_0$.  Sacando factor común $\beta$ se obtiene el otro resultado.  \fin
+
+En el caso de que el polinomio sea mónico, el denominador tiene que dividir a la unidad.  Las raices son  números enteros y necesariamente son divisores del término independiente.  Aplicando la conocida regla de Ruffini podemos hallar las raices enteras (y por lo tanto racionales) del polinomio.
+
+\begin{cor}
+
+Si un polinomio unitario con coeficientes enteros de grado $2$ ó $3$, no tiene raices enteras entonces es irreducible.
+
+\end{cor}
+
+\dem
+
+Si el polinomio no es irreducible debe descomponer en producto de dos factores, de los cuales uno necesariamente es de primer grado.  Un factor de  primer grado equivale a una raíz que por la proposición anterior debe ser un número entero.  \fin
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item El polinomio $x^2-2$ no tiene raices racionales y es irreducible.
+
+\item Las únicas raices enteras de $x^3-2$ pueden ser $+2,-2,+1,-1$ y un rápido cálculo prueba que ninguna es solución.  El polinomio es irreducible.
+
+\item A partir del grado cuatro, este razonamiento falla.  Por ejemplo 
+$$
+x^4+4x^2+4=(x^2+2)(x^2+2)
+$$
+ es claramente reducible y no posee raices racionales.
+
+\end{itemize}
+
+
+
+\begin{defi}
+
+Un polinomio con coeficientes enteros es {\sf primitivo} \index{polinomio!primitivo} si el má\-ximo común divisor de sus coeficientes es $1$.
+
+\end{defi}
+
+Equivalentemente, un polinomio con coeficientes enteros es primitivo si ningún primo $p$ divide a todos los coeficientes. 
+
+Si tenemos un polinomio con coeficientes racionales, podemos multiplicarlo por un múltiplo común de todos los denominadores eliminando de este modo los denominadores.  De esta forma un cierto múltiplo es un polinomio con coeficientes enteros.  A cualquier polinomio con coeficientes enteros le podemos realizar la siguiente operación: calculamos el máximo común divisor de los coeficientes y sacando dicho número factor común obtenemos un polinomio primitivo multiplicado por cierta constante. 
+
+\begin{propo}
+
+Dado un polinomio $q(x)$ con coeficientes racionales existe un único polinomio primitivo $q_*(x)$ que verifica
+$$
+q(x)=\frac{a}{b}\,q_*(x)
+$$ 
+donde la fracción es irreducible.
+
+\end{propo}
+
+\begin{lema}[Gauss]
+
+El producto de dos polinomios primitivos es primitivo.
+
+\end{lema}
+
+\dem
+
+
+Sean $q(x)$ y $r(x)$ los dos polinomios. Escribamos explícitamente todos los polinomios con los que vamos a tratar.
+\begin{eqnarray*}
+q(x)&=&a_nx^n+\dots +a_1x+a_0\\
+r(x)&=& b_mx^m+ \dots+b_1 x+b_0 \\
+q(x)r(x)&=& c_{n+m}x^{n+m} + \dots+c_1x+c_0
+\end{eqnarray*}
+
+
+ Dado un número primo $p$, no todos los coeficientes de $q(x)$ son divisibles por $p$. Sea $j$ el grado del menor coeficiente que no es divisible entre $p$. De este modo elementos $a_0, a_1, \dots, a_{j-1}$ son divisibles entre $p$.  Análogamente sea $k$ el grado que cumple lo mismo en el otro polinomio.
+ 
+ 
+ Concentremonos en el grado $j+k$ del producto y expresemos dicho coeficiente
+\begin{equation*}
+ \begin{split}
+ c_{j+k}= (a_0b_{j+k}+a_1b_{j+k-1}+\dots + a_{j-1}b_{k+1})+ a_jb_k+\\(a_{j+1}b_{k-1}+a_{j+2}b_{k-2} \dots + a_{j+k}b_0)
+ \end{split}
+ \end{equation*}
+ Todos los sumandos del primer paréntesis llevan un factor $a_i$ divisible entre~$p$.  Por lo tanto el primer paréntesis es divisible entre $p$.  Análogamente todos los sumandos del segundo paréntesis tienen un elemento de la forma $b_i$ que es divisible entre $p$.  Como ni $a_j$ ni $b_k$ son divisibles entre $p$, el coeficiente $c_{j+k}$ no es divisible entre $p$.  No existe ningún primo que divida a todos los coeficientes del producto, que es entonces primitivo. \fin
+ 
+
+\begin{propo}
+
+Un polinomio con coeficientes enteros es irreducible sobre $\Q$ si y solo si es irreducible sobre $\Z$.
+
+\end{propo}
+
+\dem
+
+Sea $f$ un polinomio con coeficientes enteros que no pueda expresarse como producto de dos polinomios enteros de grado estrictamente menor.
+
+Supongamos que si se puede descomponer en producto de factores racionales
+$$
+f = gh \text{ con } g, h \in \Q[x]
+$$
+
+Sabemos que cada polinomio con coeficientes racionales se puede escribir como un múltiplo de un polinomio primitivo.  Sea 
+\begin{eqnarray*}
+g& = & \frac{\alpha_1}{\beta_1}\,\,g_* \\
+h&=&  \frac{\alpha_2}{\beta_2}\,\,h_*
+\end{eqnarray*}
+Uniendo todo obtenemos
+$$
+f= \frac{\alpha_1 \alpha_2}{\beta_1 \beta_2}\,\,g_*h_* = \frac{\alpha}{\beta} \,\,g_*h_*
+$$
+donde hemos simplificado la fracción convirtiendola en irreducible.  
+
+El término de la izquierda es un polinomio con coeficientes enteros.  Como $\beta$ no divide a $\alpha$, para que el miembro de la derecha tenga también coeficientes enteros, debe dividir a todos los coeficientes del polinomio $g_*(x)h_*(x)$.  Como el producto es un polinomio primitivo, necesariamente $\beta=1$ y se obtiene la factorización
+$$
+f= (\alpha g_*h_*
+$$
+que está formada por dos polinomios de coeficientes enteros.  Esto implica una contradicción con nuestra hipótesis. \fin
+
+Ya tenemos los útiles necesarios para enunciar el {\sf criterio de irreducibilidad de Eisentein}.
+
+
+\begin{propo}
+
+Sea $f=a_nx^n+ \dots+a_1x+a_0$ un polinomio con coeficientes enteros.  Supongamos que existe un número primo $p$ que verifica:
+
+\begin{itemize}
+
+\item $p$ no divide al término de orden máximo $a_n$
+
+\item $p$ divide a todos los demás coeficientes: $a_{n-1}, \dots, a_1, a_0$.
+
+\item $p^2$ no divide al término independiente $a_0$.
+
+
+\end{itemize}
+
+Entonces el polinomio es irreducible sobre los racionales.
+
+\end{propo}
+
+\dem
+
+Gracias a la proposición anterior podemos suponer que la factorización se realiza con polinomios enteros.  Sea $f= gh$ donde
+\begin{eqnarray*}
+g(x)&=& b_rx^r+\dots+b_1x+b_0\\
+h(x)& =& c_sx^s+ \dots+c_1x+c_0
+\end{eqnarray*}
+Tenemos que $a_0= b_0c_0$.  Como $p^2$ no divide a $a_0$, $p$ solo divide a uno de los dos factores del producto.  Supongamos que divide a $b_0$. Ahora $a_1= b_0c_1+b_1c_0$. De aquí se deduce que $p$ divide a $b_1$ e inductivamente se demuestra que divide al término de mayor grado $b_r$ de $g(x)$.  Pero entonces el término de mayor grado del producto (que es $b_rc_s$) es divisible por $p$.  Contradicción. \fin
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item $x^n-2$ es irreducible aplicando el criterio de Eisentein con $p=2$.
+
+\item En general $x^n-p$ es irreducible si $p$ es un número primo.
+
+\end{itemize}
+
+\noindent{\bf Observación.}
+
+Prácticamente todos los resultados y demostraciones se pueden realizar en un anillo que sea un dominio de factorización única. En este caso el papel de $\Z$ lo juega el anillo $A$ y el papel de $\Q$ el cuerpo de fracciones del anillo íntegro.
+
+\newpage
+
+
+    
+    Sean $k \rightarrow K$ y $k \rightarrow L$ dos extensiones de un mismo cuerpo.  El conjunto de morfismos de álgebra ($k$-morfismos) de $K$ en $L$ lo denotaremos por $\mathrm{Mor}(K , L)$.  En algunos casos este conjunto admite una interpretación sencilla.  Uno de los casos más interesantes se da cuando $K$ es una extensión simple.  Estudiamos el caso transcendente y el algebraico por separado.
+    
+\begin{propo}
+
+Sea $k(\alpha)$ una extensión simple transcendente de $k$.  Dado un morfismo $\varphi: k(\alpha) \rightarrow L$ el elemento $\varphi(\alpha)$ es transcendente.  Reciprocamente, si $\beta \in L$ es transcendente, existe un morfismo $\varphi: k(\alpha) \rightarrow L$ que verifica $\varphi(\alpha)=\beta$.
+
+
+\end{propo}
+    
+    
+    
+\end{document}
+  

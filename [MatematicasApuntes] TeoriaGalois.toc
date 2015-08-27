@@ -1,0 +1,17 @@
+\select@language {spanish}
+\contentsline {section}{\numberline {1}Primeros ejemplos}{3}
+\contentsline {section}{\numberline {2}Ideales y morfismos}{4}
+\contentsline {section}{\numberline {3}Generaci\'on de anillos y cuerpos}{8}
+\contentsline {section}{\numberline {4}Cuerpos de fracciones}{11}
+\contentsline {section}{\numberline {5}$k$-\'algebras}{13}
+\contentsline {section}{\numberline {6}El grupo de Galois}{20}
+\contentsline {section}{\numberline {7}\'Algebra Lineal}{23}
+\contentsline {section}{\numberline {8}Tipos de extensiones}{28}
+\contentsline {section}{\numberline {9}Extensiones algebraicas}{34}
+\contentsline {section}{\numberline {10}Cuerpos algebraicamente cerrados}{37}
+\contentsline {section}{\numberline {11}Cuerpo de descomposici\'on}{41}
+\contentsline {section}{\numberline {12}Unicidad del cuerpo de descomposici\'on}{46}
+\contentsline {section}{\numberline {13}Cuerpos finitos}{48}
+\contentsline {section}{\numberline {14}Extensiones normales}{51}
+\contentsline {section}{\numberline {15}Separabilidad}{54}
+\contentsline {section}{\numberline {16}Polinomios irreducibles sobre $\mathbb {Q}$}{58}
