@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.18)  27 AUG 2015 17:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2014) (preloaded format=pdflatex 2014.10.18)  27 AUG 2015 17:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**"[MatematicasApuntes] TeoriaGalois.tex"
-(./[MatematicasApuntes] TeoriaGalois.tex
+**TeoriaGalois.tex
+(./TeoriaGalois.tex
 LaTeX2e <2014/05/01>
 Babel <3.9k> and hyphenation patterns for 78 languages loaded.
 (/usr/local/texlive/2014/texmf-dist/tex/latex/base/article.cls
@@ -582,11 +582,11 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 \c@defi=\count127
 \c@ob=\count128
 
-(./[MatematicasApuntes] TeoriaGalois.aux
+(./TeoriaGalois.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
-\openout1 = `"[MatematicasApuntes] TeoriaGalois.aux"'.
+\openout1 = `TeoriaGalois.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
 LaTeX Font Info:    ... okay on input line 104.
@@ -676,19 +676,18 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-ABD: EveryShipout initializing macros (./[MatematicasApuntes] TeoriaGalois.toc
+ABD: EveryShipout initializing macros (./TeoriaGalois.toc
 LaTeX Info: Redefining \. on input line 1.
 LaTeX Info: Redefining \% on input line 1.
-
-[1
+ [1
 
 {/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}])
 \tf@toc=\write6
-\openout6 = `"[MatematicasApuntes] TeoriaGalois.toc"'.
+\openout6 = `TeoriaGalois.toc'.
 
-
-[2] [3] [4] [5] [6] [7] [8] [9] [10] [11] [12] [13] <xymatrix 3x2 131> [14]
-[15] [16] [17] [18] [19] [20] [21] [22] [23] [24]
+ [2] [3] [4] [5] [6]
+[7] [8] [9] [10] [11] [12] [13] <xymatrix 3x2 131> [14] [15] [16] [17] [18]
+[19] [20] [21] [22] [23] [24]
 LaTeX Font Info:    Try loading font information for U+euf on input line 1020.
 
 (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/ueuf.fd
@@ -714,8 +713,7 @@ Overfull \hbox (5.42175pt too wide) in paragraph at lines 2004--2005
 te sen-ci-llo. Su rec^^S^^Ppro-
  []
 
-[52] [53] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63]
-(./[MatematicasApuntes] TeoriaGalois.aux
+[52] [53] [54] [55] [56] [57] [58] [59] [60] [61] [62] [63] (./TeoriaGalois.aux
 LaTeX Info: Redefining \. on input line 6.
 LaTeX Info: Redefining \% on input line 6.
 )
@@ -725,12 +723,12 @@ LaTeX Warning: There were undefined references.
  ) 
 Here is how much of TeX's memory you used:
  15095 strings out of 493117
- 264096 string characters out of 6135432
+ 263863 string characters out of 6135432
  360897 words of memory out of 5000000
  18205 multiletter control sequences out of 15000+600000
  18998 words of font info for 80 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 54i,15n,73p,3267b,433s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 54i,15n,73p,3244b,433s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 ></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
 </usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
@@ -749,8 +747,7 @@ e/2014/texmf-dist/fonts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/local/t
 exlive/2014/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/loc
 al/texlive/2014/texmf-dist/fonts/type1/public/xypic/xyatip10.pfb></usr/local/te
 xlive/2014/texmf-dist/fonts/type1/public/xypic/xybtip10.pfb>
-Output written on "[MatematicasApuntes] TeoriaGalois.pdf" (63 pages, 318380 byt
-es).
+Output written on TeoriaGalois.pdf (63 pages, 318380 bytes).
 PDF statistics:
  283 PDF objects out of 1000 (max. 8388607)
  198 compressed objects within 2 object streams
