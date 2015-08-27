@@ -4,6 +4,7 @@
 \usepackage[spanish]{babel}  
 \usepackage{indentfirst} %%%%%%%%%%%%%%%%Crear un indent al principio
 \usepackage[latin1]{inputenc}%%%%%%%%%%%%ñ y acentos
+\usepackage{makeidx}
 \usepackage{amstext}%%%%%%%%
 \usepackage{amsfonts}%%%%%%%
 \usepackage{amssymb}%%%%%%%% AMSLaTeX
@@ -93,7 +94,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-
+\makeindex
 
 %%%%%%%%%%%%%%%%%
 \title{Teoria de Galois}
@@ -2432,7 +2433,16 @@ Sea $k(\alpha)$ una extensión simple transcendente de $k$.  Dado un morfismo $\v
 
 \end{propo}
     
-    
+ \newpage
+
+\printindex
+
+\nocite{*}
+
+\newpage
+
+\bibliographystyle{plain}
+\bibliography{Galois.bib}   
     
 \end{document}
   
